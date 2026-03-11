@@ -10,12 +10,22 @@
 },
 
 {
+"nombre":"iPhone 12 pro",
+"descripcion":"128GB | Batería 100% | Libre | Reacondicionado",
+"precio":"4599",
+"tipo":"celular",
+"imagen":"https://givu.mx/wp-content/uploads/2024/07/12progris.png",
+"video":"https://youtube.com",
+"compra":"https://link.mercadopago.com"
+},
+
+{
 "nombre":"iPhone 8 Plus",
 "descripcion":"256GB | Batería 83% | Libre | Bypass Con señal",
 "precio":"2199",
 "tipo":"celular",
 "imagen":"https://i5.walmartimages.com/asr/36c9d3ba-32c0-4635-ad83-6e646fc91f14.6a52ca89115aa77a645eace2ea74509a.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
-"video":"https://youtube.com",
+"video":"https://youtube.com/shorts/K9FZvSCSjEA?si=BgJDBKJaO0Ov_N_y",
 "compra":"https://link.mercadopago.com"
 },
 
