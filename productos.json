@@ -10,6 +10,16 @@
 },
 
 {
+"nombre":"iPhone 8 Plus",
+"descripcion":"256GB | Batería 83% | Libre | Bypass Con señal",
+"precio":"2199",
+"tipo":"celular",
+"imagen":"https://i5.walmartimages.com/asr/36c9d3ba-32c0-4635-ad83-6e646fc91f14.6a52ca89115aa77a645eace2ea74509a.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+"video":"https://youtube.com",
+"compra":"https://link.mercadopago.com"
+},
+
+{
 "nombre":"Samsung A06",
 "descripcion":"64GB | Reacondicionado | Libre",
 "precio":"1799",
