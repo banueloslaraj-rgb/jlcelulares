@@ -1,0 +1,31 @@
+[
+{
+"nombre":"iPhone 13",
+"descripcion":"128GB | Batería 100% | Libre",
+"precio":"9500",
+"tipo":"celular",
+"imagen":"https://via.placeholder.com/300",
+"video":"https://youtube.com",
+"compra":"https://link.mercadopago.com"
+},
+
+{
+"nombre":"Samsung S21",
+"descripcion":"256GB | Excelente estado",
+"precio":"8200",
+"tipo":"celular",
+"imagen":"https://via.placeholder.com/300",
+"video":"https://youtube.com",
+"compra":"https://link.mercadopago.com"
+},
+
+{
+"nombre":"Audífonos Bluetooth",
+"descripcion":"Alta calidad de sonido",
+"precio":"350",
+"tipo":"accesorio",
+"imagen":"https://via.placeholder.com/300",
+"video":"https://youtube.com",
+"compra":"https://link.mercadopago.com"
+}
+]
