@@ -1,21 +1,31 @@
 [
 {
-"nombre":"iPhone 13",
-"descripcion":"128GB | Batería 100%",
+"nombre":"iPhone 11",
+"descripcion":"64GB | Batería 83% | Libre",
 "precio":"9500",
 "tipo":"celular",
-"imagen":"URL_IMAGEN",
-"video":"URL_VIDEO",
-"compra":"LINK_MERCADOPAGO"
+"imagen":"https://cdn.smart-gsm.com/img/picture/big/apple-iphone-11.jpg",
+"video":"https://youtube.com",
+"compra":"https://link.mercadopago.com"
 },
 
 {
-"nombre":"Cargador iPhone",
-"descripcion":"Carga rápida",
-"precio":"250",
+"nombre":"Samsung A06",
+"descripcion":"64GB | Usado",
+"precio":"8200",
+"tipo":"celular",
+"imagen":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7d74dAAN0p-4jHuJl9K9aLTtLWGf4NUbTew&s",
+"video":"https://youtube.com",
+"compra":"https://link.mercadopago.com"
+},
+
+{
+"nombre":"Audífonos Bluetooth",
+"descripcion":"Alta calidad de sonido",
+"precio":"350",
 "tipo":"accesorio",
-"imagen":"URL_IMAGEN",
-"video":"URL_VIDEO",
-"compra":"LINK_MERCADOPAGO"
+"imagen":"https://via.placeholder.com/300",
+"video":"https://youtube.com",
+"compra":"https://link.mercadopago.com"
 }
 ]
