@@ -2,7 +2,7 @@
 {
 "nombre":"iPhone 11",
 "descripcion":"64GB | Batería 83% | Libre",
-"precio":"9500",
+"precio":"3,199",
 "tipo":"celular",
 "imagen":"https://cdn.smart-gsm.com/img/picture/big/apple-iphone-11.jpg",
 "video":"https://youtube.com",
@@ -12,7 +12,7 @@
 {
 "nombre":"Samsung A06",
 "descripcion":"64GB | Usado",
-"precio":"8200",
+"precio":"1,799",
 "tipo":"celular",
 "imagen":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7d74dAAN0p-4jHuJl9K9aLTtLWGf4NUbTew&s",
 "video":"https://youtube.com",
@@ -27,5 +27,15 @@
 "imagen":"https://via.placeholder.com/300",
 "video":"https://youtube.com",
 "compra":"https://link.mercadopago.com"
-}
+},
+
+{
+"nombre":"eSIM Telcel",
+"descripcion":"Adquiere tu numero digital",
+"precio":"250",
+"tipo":"accesorio",
+"imagen":"https://scontent.ftpq1-1.fna.fbcdn.net/v/t39.30808-6/650846985_122172287870831331_7099814034209431857_n.jpg?stp=dst-jpg_p526x296_tt6&_nc_cat=103&ccb=1-7&_nc_sid=7b2446&_nc_ohc=UGAIB1SCr-EQ7kNvwFO5lwl&_nc_oc=Admx0ysK25_FzLFuLfTbZuLHLo7-veiovVuS0kWFFH9BG8HmpTmYt65UlwIlmFcLGbZJtfCY4pPny5fioHfA74dS&_nc_zt=23&_nc_ht=scontent.ftpq1-1.fna&_nc_gid=-FLkIZJ9GKxbrAm9_UFDuw&_nc_ss=8&oh=00_AfzwmsuZ0NEPKOigWWFcZXFFIc3r2oXcchvONuOBTjJ0tg&oe=69B76EBA",
+"video":"https://youtube.com",
+"compra":"https://link.mercadopago.com"
+},
 ]
