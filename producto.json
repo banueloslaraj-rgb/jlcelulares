@@ -1,0 +1,82 @@
+[
+{
+"id": 1,
+"nombre":"iPhone 11",
+"descripcion":"64GB | Batería 83% | Libre | Reacondicionado",
+"precio":3199,
+"tipo":"celular",
+"imagen":"https://cdn.smart-gsm.com/img/picture/big/apple-iphone-11.jpg",
+"video":"https://youtube.com/shorts/w1KHfhfkdac?si=iiKdW_T9IcwKIqMx",
+"compra":"https://link.mercadopago.com"
+},
+{
+"id": 2,
+"nombre":"iPhone 12 pro",
+"descripcion":"128GB | Batería 100% | Libre | Reacondicionado",
+"precio":4599,
+"tipo":"celular",
+"imagen":"https://givu.mx/wp-content/uploads/2024/07/12progris.png",
+"video":"https://youtube.com/shorts/3PpSWS8wnyI?si=NkFJtVZrGAgn2nZ1",
+"compra":"https://link.mercadopago.com"
+},
+{
+"id": 3,
+"nombre":"iPhone 14",
+"descripcion":"128GB | Batería 83% | Libre | Dual Sim | Reacondicionado",
+"precio":6599,
+"tipo":"celular",
+"imagen":"https://content.macstore.mx/img/sku/IPHONE623_FZ.jpg",
+"video":"https://youtube.com/shorts/aZZQmWWQ7h0?si=Lf7pqbNb32TbWkE4",
+"compra":"https://link.mercadopago.com"
+},
+{
+"id": 4,
+"nombre":"iPhone 15",
+"descripcion":"128GB | Batería 100% | Libre | Dual Sim | Reacondicionado",
+"precio":7799,
+"tipo":"celular",
+"imagen":"https://www.telcel.com/medias/515Wx515H-iPhone-15-BlueDual2.jpeg?context=bWFzdGVyfGltYWdlc3w0MzQ4MHxpbWFnZS9qcGVnfGltYWdlcy9oMTMvaDJlLzk0MDM4MjY3NjU4NTQuanBnfGViNTFjOWFjMWYwYjQwZTYwMGE1N2UyZDhkMTc0OGMxOThmMDFhMTIyMzJmOWI3Mzc4ZWU2ZTAwY2ZlNzhhODQ",
+"video":"https://youtube.com/shorts/pcKlNEVwRJc?si=hQnG4xMH9EmBkztr",
+"compra":"https://link.mercadopago.com"
+},
+{
+"id": 5,
+"nombre":"iPhone 8 Plus",
+"descripcion":"256GB | Batería 83% | Libre | Bypass Con señal",
+"precio":2199,
+"tipo":"celular",
+"imagen":"https://i5.walmartimages.com/asr/36c9d3ba-32c0-4635-ad83-6e646fc91f14.6a52ca89115aa77a645eace2ea74509a.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF",
+"video":"https://youtube.com/shorts/K9FZvSCSjEA?si=BgJDBKJaO0Ov_N_y",
+"compra":"https://link.mercadopago.com"
+},
+{
+"id": 6,
+"nombre":"Samsung A06",
+"descripcion":"64GB | Reacondicionado | Libre",
+"precio":1799,
+"tipo":"celular",
+"imagen":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7d74dAAN0p-4jHuJl9K9aLTtLWGf4NUbTew&s",
+"video":"https://youtube.com/shorts/Ozbv7YY3Img?si=HovJAIuqfKsx9NQR",
+"compra":"https://link.mercadopago.com"
+},
+{
+"id": 7,
+"nombre":"Audífonos Bluetooth",
+"descripcion":"Alta calidad de sonido",
+"precio":350,
+"tipo":"accesorio",
+"imagen":"https://via.placeholder.com/300",
+"video":"https://youtube.com",
+"compra":"https://link.mercadopago.com"
+},
+{
+"id": 8,
+"nombre":"eSIM Telcel",
+"descripcion":"LADA a elegir",
+"precio":250,
+"tipo":"servicio",
+"imagen":"https://m.media-amazon.com/images/I/518WwCz4--L._AC_UF350,350_QL80_.jpg",
+"video":"https://youtube.com",
+"compra":"https://link.mercadopago.com"
+}
+]

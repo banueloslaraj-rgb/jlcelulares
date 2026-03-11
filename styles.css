@@ -115,13 +115,267 @@ width: 100%;
 margin-top: 10px;
 }
 
-/* CARRITO */
-#carrito{
-background:white;
-padding:20px;
-margin:20px;
-border-radius:15px;
-box-shadow:0 4px 15px rgba(0,0,0,0.1);
+/* MODAL DEL CARRITO */
+.modal {
+display: none;
+position: fixed;
+z-index: 2000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0,0,0,0.5);
+overflow: auto;
+}
+
+.modal-contenido {
+background-color: #fefefe;
+margin: 30px auto;
+padding: 20px;
+border-radius: 20px;
+width: 90%;
+max-width: 600px;
+box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+animation: modalSlideIn 0.3s ease;
+}
+
+.modal-pago {
+max-width: 500px;
+}
+
+@keyframes modalSlideIn {
+from {
+transform: translateY(-50px);
+opacity: 0;
+}
+to {
+transform: translateY(0);
+opacity: 1;
+}
+}
+
+.modal-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+border-bottom: 2px solid #f0f0f0;
+padding-bottom: 15px;
+margin-bottom: 20px;
+}
+
+.modal-header h2 {
+margin: 0;
+color: #333;
+}
+
+.cerrar {
+color: #aaa;
+font-size: 28px;
+font-weight: bold;
+cursor: pointer;
+transition: 0.3s;
+}
+
+.cerrar:hover {
+color: #333;
+}
+
+/* CARRITO DENTRO DEL MODAL */
+#carritoContenido, #pagoContenido {
+max-height: 60vh;
+overflow-y: auto;
+padding: 10px;
+}
+
+.item-carrito {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 10px;
+border-bottom: 1px solid #f0f0f0;
+}
+
+.item-info {
+flex: 2;
+}
+
+.item-nombre {
+font-weight: 600;
+margin-bottom: 5px;
+}
+
+.item-precio {
+color: #00a86b;
+font-weight: 500;
+}
+
+.item-cantidad {
+display: flex;
+align-items: center;
+gap: 10px;
+}
+
+.btn-cantidad {
+padding: 5px 10px;
+background: #f0f0f0;
+color: #333;
+border-radius: 5px;
+font-size: 16px;
+cursor: pointer;
+}
+
+.btn-cantidad:hover {
+background: #e0e0e0;
+}
+
+.item-eliminar {
+color: #dc3545;
+cursor: pointer;
+font-size: 20px;
+margin-left: 15px;
+}
+
+.item-eliminar:hover {
+color: #c82333;
+}
+
+.carrito-total {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-top: 20px;
+padding-top: 20px;
+border-top: 2px solid #f0f0f0;
+font-size: 20px;
+font-weight: bold;
+}
+
+.btn-pago {
+width: 100%;
+padding: 15px;
+background: #00a86b;
+font-size: 18px;
+margin-top: 20px;
+}
+
+.btn-pago:hover {
+background: #00955e;
+}
+
+/* FORMULARIO DE ENVÍO */
+.form-envio {
+display: flex;
+flex-direction: column;
+gap: 15px;
+}
+
+.form-group {
+display: flex;
+flex-direction: column;
+}
+
+.form-group label {
+font-weight: 600;
+margin-bottom: 5px;
+color: #555;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+padding: 12px;
+border: 2px solid #e0e0e0;
+border-radius: 10px;
+font-size: 16px;
+transition: 0.3s;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+outline: none;
+border-color: #0d6efd;
+}
+
+.form-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 15px;
+}
+
+.resumen-compra {
+background: #f8f9fa;
+padding: 15px;
+border-radius: 10px;
+margin: 20px 0;
+}
+
+.resumen-item {
+display: flex;
+justify-content: space-between;
+margin: 10px 0;
+}
+
+.resumen-total {
+display: flex;
+justify-content: space-between;
+margin-top: 15px;
+padding-top: 15px;
+border-top: 2px solid #ddd;
+font-weight: bold;
+font-size: 18px;
+}
+
+.metodos-pago {
+display: flex;
+gap: 15px;
+margin: 20px 0;
+}
+
+.metodo-pago {
+flex: 1;
+padding: 15px;
+border: 2px solid #e0e0e0;
+border-radius: 10px;
+text-align: center;
+cursor: pointer;
+transition: 0.3s;
+}
+
+.metodo-pago:hover {
+border-color: #0d6efd;
+}
+
+.metodo-pago.seleccionado {
+border-color: #0d6efd;
+background: #e6f2ff;
+}
+
+.metodo-pago img {
+width: 50px;
+height: 50px;
+object-fit: contain;
+margin-bottom: 10px;
+}
+
+/* BOTONES DE ACCIÓN */
+.acciones-carrito {
+display: flex;
+gap: 10px;
+margin-top: 15px;
+}
+
+.btn-secundario {
+background: #6c757d;
+flex: 1;
+}
+
+.btn-secundario:hover {
+background: #5a6268;
+}
+
+.btn-peligro {
+background: #dc3545;
+}
+
+.btn-peligro:hover {
+background: #c82333;
 }
 
 /* FOOTER */
@@ -214,16 +468,6 @@ margin: 8px 0;
 font-size: 20px;
 }
 
-#carrito {
-margin: 10px;
-padding: 15px;
-}
-
-#carrito button {
-width: 100%;
-margin: 5px 0;
-}
-
 footer {
 padding: 25px 15px;
 font-size: 14px;
@@ -247,12 +491,23 @@ position: sticky;
 top: 10px;
 }
 
-/* Ajustes para el carrito en móvil */
-#carrito button {
-margin: 5px 0;
+.modal-contenido {
+margin: 10px;
+padding: 15px;
+width: auto;
 }
 
-#carrito button:last-child {
-margin-left: 0 !important;
+.form-row {
+grid-template-columns: 1fr;
+gap: 10px;
+}
+
+.metodos-pago {
+flex-direction: column;
+gap: 10px;
+}
+
+.acciones-carrito {
+flex-direction: column;
 }
 }
