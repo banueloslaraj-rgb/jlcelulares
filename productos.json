@@ -56,6 +56,14 @@
 "video":"https://youtube.com"
 },
 {
+"nombre":"Cubo de Carga 20w",
+"descripcion":"Alta calidad de carga 20W",
+"precio":150,
+"tipo":"accesorio",
+"imagen":"https://i.postimg.cc/fbkw1Qrm/Cubo1HR20W.jpg",
+"video":"https://youtube.com"
+},
+{
 "nombre":"eSIM Telcel",
 "descripcion":"LADA a elegir | Incluye de Saldo",
 "precio":250,
@@ -72,11 +80,11 @@
 "video":"https://youtube.com"
 },
 {
-"nombre":"eSIM Movistar | Incluye 100 de saldo ",
-"descripcion":"LADA a elegir",
+"nombre":"eSIM Movistar",
+"descripcion":"LADA a elegir | Incluye 100 de Saldo",
 "precio":299,
 "tipo":"servicio",
-"imagen":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHZ2w-QmsiQdMml1JkIAFBaikZkX4acxNRmw&s",
+"imagen":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxKvaa974A_2ehqOEgHxswcbzGEU-3Y5_riA&s",
 "video":"https://youtube.com"
 },
 {
