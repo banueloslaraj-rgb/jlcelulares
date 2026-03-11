@@ -115,7 +115,7 @@ width: 100%;
 margin-top: 10px;
 }
 
-/* MODAL DEL CARRITO */
+/* MODAL */
 .modal {
 display: none;
 position: fixed;
@@ -180,8 +180,8 @@ transition: 0.3s;
 color: #333;
 }
 
-/* CARRITO DENTRO DEL MODAL */
-#carritoContenido, #pagoContenido {
+/* CARRITO */
+#carritoContenido, #envioContenido {
 max-height: 60vh;
 overflow-y: auto;
 padding: 10px;
@@ -250,6 +250,29 @@ font-size: 20px;
 font-weight: bold;
 }
 
+.acciones-carrito {
+display: flex;
+gap: 10px;
+margin-top: 15px;
+}
+
+.btn-secundario {
+background: #6c757d;
+flex: 1;
+}
+
+.btn-secundario:hover {
+background: #5a6268;
+}
+
+.btn-peligro {
+background: #dc3545;
+}
+
+.btn-peligro:hover {
+background: #c82333;
+}
+
 .btn-pago {
 width: 100%;
 padding: 15px;
@@ -260,6 +283,18 @@ margin-top: 20px;
 
 .btn-pago:hover {
 background: #00955e;
+}
+
+.btn-whatsapp {
+width: 100%;
+padding: 15px;
+background: #25D366;
+font-size: 18px;
+margin-top: 10px;
+}
+
+.btn-whatsapp:hover {
+background: #20B858;
 }
 
 /* FORMULARIO DE ENVÍO */
@@ -322,62 +357,6 @@ font-weight: bold;
 font-size: 18px;
 }
 
-.metodos-pago {
-display: flex;
-gap: 15px;
-margin: 20px 0;
-}
-
-.metodo-pago {
-flex: 1;
-padding: 15px;
-border: 2px solid #e0e0e0;
-border-radius: 10px;
-text-align: center;
-cursor: pointer;
-transition: 0.3s;
-}
-
-.metodo-pago:hover {
-border-color: #0d6efd;
-}
-
-.metodo-pago.seleccionado {
-border-color: #0d6efd;
-background: #e6f2ff;
-}
-
-.metodo-pago img {
-width: 50px;
-height: 50px;
-object-fit: contain;
-margin-bottom: 10px;
-}
-
-/* BOTONES DE ACCIÓN */
-.acciones-carrito {
-display: flex;
-gap: 10px;
-margin-top: 15px;
-}
-
-.btn-secundario {
-background: #6c757d;
-flex: 1;
-}
-
-.btn-secundario:hover {
-background: #5a6268;
-}
-
-.btn-peligro {
-background: #dc3545;
-}
-
-.btn-peligro:hover {
-background: #c82333;
-}
-
 /* FOOTER */
 footer{
 text-align:center;
@@ -387,7 +366,7 @@ color:white;
 margin-top:40px;
 }
 
-/* BOTON WHATSAPP */
+/* BOTON WHATSAPP FLOTANTE */
 .whatsapp{
 position:fixed;
 bottom:25px;
@@ -417,7 +396,7 @@ z-index: 100;
 margin: 10px;
 }
 
-/* ===== ESTILOS PARA MÓVIL ===== */
+/* VERSIÓN MÓVIL */
 @media (max-width: 600px) {
 
 header {
@@ -499,11 +478,6 @@ width: auto;
 
 .form-row {
 grid-template-columns: 1fr;
-gap: 10px;
-}
-
-.metodos-pago {
-flex-direction: column;
 gap: 10px;
 }
 

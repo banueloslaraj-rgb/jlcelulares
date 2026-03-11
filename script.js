@@ -1,17 +1,10 @@
 let carrito = []
-let costoEnvio = 150 // Costo de envío fijo
-
-// Inicializar Mercado Pago (necesitas tu public key)
-const mp = new MercadoPago('TU_PUBLIC_KEY_AQUI', {
-    locale: 'es-MX'
-});
+let costoEnvio = 150
 
 async function cargarProductos(){
-
 const res = await fetch("productos.json")
 const productos = await res.json()
 
-// Convertir precios a números
 const productosProcesados = productos.map(p => ({
 ...p,
 precio: Number(p.precio)
@@ -19,11 +12,9 @@ precio: Number(p.precio)
 
 window.listaProductos = productosProcesados
 mostrar(productosProcesados)
-
 }
 
 function mostrar(lista){
-
 const contenedor = document.getElementById("productos")
 
 if(!lista || lista.length === 0) {
@@ -34,71 +25,46 @@ return
 contenedor.innerHTML = ""
 
 lista.forEach((p,index)=>{
-
-// Formatear precio con comas
 const precioFormateado = p.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 
 contenedor.innerHTML += `
-
 <div class="card">
-
 <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/300?text=Imagen+no+disponible'">
-
 <h3>${p.nombre}</h3>
-
 <p>${p.descripcion}</p>
-
 <p class="precio">$${precioFormateado}</p>
-
 <a href="${p.video}" target="_blank">🎥 Ver video</a>
-
 <br><br>
-
-<button onclick="agregar(${index})">
-Agregar al carrito
-</button>
-
+<button onclick="agregar(${index})">Agregar al carrito</button>
 </div>
-
 `
-
 })
-
 }
 
 function filtrar(tipo){
-
 if(tipo==="todos"){
 mostrar(window.listaProductos)
 return
 }
-
 const filtrados = window.listaProductos.filter(p=>p.tipo===tipo)
-
 mostrar(filtrados)
-
 }
 
 function agregar(i){
-
 const producto = window.listaProductos[i]
-
-// Verificar si el producto ya está en el carrito
-const existe = carrito.find(item => item.id === producto.id)
+const existe = carrito.find(item => item.nombre === producto.nombre)
 
 if(existe) {
 existe.cantidad++
 } else {
 carrito.push({
 ...producto,
-id: Date.now() + Math.random(),
 cantidad: 1
 })
 }
 
 actualizarContadorCarrito()
-mostrarNotificacion(`${producto.nombre} agregado al carrito`)
-
+mostrarNotificacion(`${producto.nombre} agregado`)
 }
 
 function verCarrito(){
@@ -110,6 +76,10 @@ actualizarVistaCarrito()
 
 function cerrarModal() {
 document.getElementById('modalCarrito').style.display = 'none'
+}
+
+function cerrarModalEnvio() {
+document.getElementById('modalEnvio').style.display = 'none'
 }
 
 function actualizarVistaCarrito() {
@@ -156,99 +126,58 @@ html += `
 <button class="btn-secundario" onclick="cerrarModal()">Seguir comprando</button>
 <button class="btn-peligro" onclick="vaciarCarrito()">Vaciar carrito</button>
 </div>
-<button class="btn-pago" onclick="mostrarFormularioPago()">Proceder al pago</button>
+<button class="btn-whatsapp" onclick="mostrarFormularioEnvio()">
+📱 Continuar con WhatsApp
+</button>
 `
 
 contenido.innerHTML = html
 }
 
-function cambiarCantidad(index, cambio) {
-const item = carrito[index]
-item.cantidad += cambio
-
-if(item.cantidad <= 0) {
-eliminarDelCarrito(index)
-} else {
-actualizarVistaCarrito()
-actualizarContadorCarrito()
-}
-}
-
-function eliminarDelCarrito(index) {
-carrito.splice(index, 1)
-actualizarVistaCarrito()
-actualizarContadorCarrito()
-mostrarNotificacion('Producto eliminado del carrito')
-}
-
-function vaciarCarrito() {
-if(confirm('¿Estás seguro de vaciar el carrito?')) {
-carrito = []
-actualizarVistaCarrito()
-actualizarContadorCarrito()
-mostrarNotificacion('Carrito vaciado')
-}
-}
-
-function mostrarFormularioPago() {
+function mostrarFormularioEnvio() {
 cerrarModal()
-const modalPago = document.getElementById('modalPago')
-const contenido = document.getElementById('pagoContenido')
+const modalEnvio = document.getElementById('modalEnvio')
+const contenido = document.getElementById('envioContenido')
 
 const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0)
 const total = subtotal + costoEnvio
 
 contenido.innerHTML = `
-<form id="formEnvio" onsubmit="procesarPago(event)">
 <div class="form-envio">
-<h3>📦 Datos de envío</h3>
+<h3>📦 Datos para el envío</h3>
+<p style="color:#666; margin-bottom:20px;">Completa tus datos para enviarte el pedido por WhatsApp</p>
 
-<div class="form-row">
 <div class="form-group">
 <label>Nombre completo *</label>
-<input type="text" id="nombre" required>
-</div>
-<div class="form-group">
-<label>Teléfono *</label>
-<input type="tel" id="telefono" required>
-</div>
+<input type="text" id="nombre" placeholder="Ej: Juan Pérez">
 </div>
 
 <div class="form-group">
-<label>Email *</label>
-<input type="email" id="email" required>
+<label>Teléfono *</label>
+<input type="tel" id="telefono" placeholder="Ej: 3111234567">
 </div>
 
 <div class="form-group">
 <label>Dirección completa *</label>
-<input type="text" id="direccion" required>
+<input type="text" id="direccion" placeholder="Calle, número, colonia">
 </div>
 
 <div class="form-row">
 <div class="form-group">
 <label>Ciudad *</label>
-<input type="text" id="ciudad" required>
+<input type="text" id="ciudad" placeholder="Ciudad">
 </div>
 <div class="form-group">
 <label>Estado *</label>
-<input type="text" id="estado" required>
+<input type="text" id="estado" placeholder="Estado">
 </div>
 </div>
 
 <div class="form-row">
 <div class="form-group">
 <label>Código postal *</label>
-<input type="text" id="cp" required>
+<input type="text" id="cp" placeholder="C.P.">
 </div>
-<div class="form-group">
-<label>Colonia *</label>
-<input type="text" id="colonia" required>
-</div>
-</div>
-
-<div class="form-group">
-<label>Referencias (opcional)</label>
-<textarea id="referencias" rows="2"></textarea>
 </div>
 
 <div class="resumen-compra">
@@ -269,102 +198,85 @@ ${carrito.map(item => `
 </div>
 </div>
 
-<h3>💳 Método de pago</h3>
-<div class="metodos-pago">
-<div class="metodo-pago seleccionado" onclick="seleccionarMetodoPago('mercadopago')">
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/MercadoPago.svg/2560px-MercadoPago.svg.png" alt="Mercado Pago">
-<span>Mercado Pago</span>
-</div>
-</div>
-
-<button type="submit" class="btn-pago" style="margin-top:20px;">
-Pagar con Mercado Pago
+<button class="btn-whatsapp" onclick="enviarPedidoWhatsApp()" style="margin-top:10px;">
+📱 Enviar pedido por WhatsApp
 </button>
+<button class="btn-secundario" onclick="cerrarModalEnvio()" style="margin-top:10px;">Cancelar</button>
 </div>
-</form>
 `
 
-modalPago.style.display = 'block'
+modalEnvio.style.display = 'block'
 }
 
-function cerrarModalPago() {
-document.getElementById('modalPago').style.display = 'none'
-}
+function enviarPedidoWhatsApp() {
+const nombre = document.getElementById('nombre')?.value
+const telefono = document.getElementById('telefono')?.value
+const direccion = document.getElementById('direccion')?.value
+const ciudad = document.getElementById('ciudad')?.value
+const estado = document.getElementById('estado')?.value
+const cp = document.getElementById('cp')?.value
 
-function seleccionarMetodoPago(metodo) {
-// Por ahora solo tenemos Mercado Pago
-document.querySelectorAll('.metodo-pago').forEach(el => {
-el.classList.remove('seleccionado')
-})
-event.currentTarget.classList.add('seleccionado')
-}
-
-async function procesarPago(event) {
-event.preventDefault()
-
-// Validar que haya productos
-if(carrito.length === 0) {
-mostrarNotificacion('El carrito está vacío')
+if(!nombre || !telefono || !direccion || !ciudad || !estado || !cp) {
+mostrarNotificacion('❌ Completa todos los campos')
 return
 }
 
-// Obtener datos del formulario
-const datosEnvio = {
-nombre: document.getElementById('nombre').value,
-telefono: document.getElementById('telefono').value,
-email: document.getElementById('email').value,
-direccion: document.getElementById('direccion').value,
-ciudad: document.getElementById('ciudad').value,
-estado: document.getElementById('estado').value,
-cp: document.getElementById('cp').value,
-colonia: document.getElementById('colonia').value,
-referencias: document.getElementById('referencias').value
-}
-
-// Guardar datos de envío para usarlos después
-localStorage.setItem('datosEnvio', JSON.stringify(datosEnvio))
-
-// Calcular total
 const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0)
 const total = subtotal + costoEnvio
 
-// Crear preferencia de pago (esto deberías hacerlo en tu backend)
-// Por ahora simulamos la redirección a Mercado Pago
-mostrarNotificacion('Procesando pago...')
+let mensaje = "🛒 *NUEVO PEDIDO - JL CELULARES*%0A%0A"
+mensaje += "*PRODUCTOS:*%0A"
 
-// Simulación de creación de preferencia
-// En producción, esto debe ser una llamada a tu backend
-const preferencia = {
-items: carrito.map(item => ({
-title: item.nombre,
-quantity: item.cantidad,
-currency_id: 'MXN',
-unit_price: item.precio
-})),
-back_urls: {
-success: 'https://tusitio.com/success',
-failure: 'https://tusitio.com/failure',
-pending: 'https://tusitio.com/pending'
-},
-auto_return: 'approved'
+carrito.forEach(item => {
+mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}%0A`
+})
+
+mensaje += `%0A*SUBTOTAL:* $${subtotal.toLocaleString()}`
+mensaje += `%0A*ENVÍO:* $${costoEnvio.toLocaleString()}`
+mensaje += `%0A*TOTAL:* $${total.toLocaleString()}%0A%0A`
+
+mensaje += "*DATOS DE ENVÍO:*%0A"
+mensaje += `👤 ${nombre}%0A`
+mensaje += `📞 ${telefono}%0A`
+mensaje += `📍 ${direccion}%0A`
+mensaje += `🏙️ ${ciudad}, ${estado} CP ${cp}%0A%0A`
+
+mensaje += "¡Gracias por tu compra! 🙌"
+
+window.open(`https://wa.me/523111063251?text=${mensaje}`)
+
+cerrarModalEnvio()
+carrito = []
+actualizarContadorCarrito()
+mostrarNotificacion('✅ Pedido enviado por WhatsApp')
 }
 
-// Aquí iría la llamada a tu backend para crear la preferencia
-// Por ahora, redirigimos a una simulación
-setTimeout(() => {
-// Esto es solo para demostración
-window.open('https://www.mercadopago.com.mx/', '_blank')
-mostrarNotificacion('Redirigiendo a Mercado Pago...')
-}, 1500)
+function cambiarCantidad(index, cambio) {
+const item = carrito[index]
+item.cantidad += cambio
 
-// En un caso real, harías:
-// const response = await fetch('https://tuservidor.com/crear-preferencia', {
-//     method: 'POST',
-//     headers: {'Content-Type': 'application/json'},
-//     body: JSON.stringify(preferencia)
-// })
-// const data = await response.json()
-// window.location.href = data.init_point
+if(item.cantidad <= 0) {
+eliminarDelCarrito(index)
+} else {
+actualizarVistaCarrito()
+actualizarContadorCarrito()
+}
+}
+
+function eliminarDelCarrito(index) {
+carrito.splice(index, 1)
+actualizarVistaCarrito()
+actualizarContadorCarrito()
+mostrarNotificacion('Producto eliminado')
+}
+
+function vaciarCarrito() {
+if(confirm('¿Vaciar carrito?')) {
+carrito = []
+actualizarVistaCarrito()
+actualizarContadorCarrito()
+mostrarNotificacion('Carrito vaciado')
+}
 }
 
 function actualizarContadorCarrito() {
@@ -411,10 +323,6 @@ document.body.appendChild(notif)
 setTimeout(() => notif.remove(), 2000)
 }
 
-function comprar() {
-verCarrito()
-}
-
 function buscar() {
 const texto = document.getElementById('buscador').value.toLowerCase()
 const filtrados = window.listaProductos.filter(p => 
@@ -424,17 +332,11 @@ p.descripcion.toLowerCase().includes(texto)
 mostrar(filtrados)
 }
 
-// Cerrar modales al hacer clic fuera
 window.onclick = function(event) {
 const modalCarrito = document.getElementById('modalCarrito')
-const modalPago = document.getElementById('modalPago')
-if (event.target == modalCarrito) {
-modalCarrito.style.display = 'none'
-}
-if (event.target == modalPago) {
-modalPago.style.display = 'none'
-}
+const modalEnvio = document.getElementById('modalEnvio')
+if (event.target == modalCarrito) modalCarrito.style.display = 'none'
+if (event.target == modalEnvio) modalEnvio.style.display = 'none'
 }
 
-// Iniciar
 cargarProductos()

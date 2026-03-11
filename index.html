@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JL Celulares</title>
 <link rel="stylesheet" href="styles.css">
-<!-- SDK de Mercado Pago -->
-<script src="https://sdk.mercadopago.com/js/v2"></script>
 </head>
 
 <body>
@@ -35,22 +33,18 @@
             <h2>🛒 Tu Carrito</h2>
             <span class="cerrar" onclick="cerrarModal()">&times;</span>
         </div>
-        <div class="modal-body" id="carritoContenido">
-            <!-- El contenido del carrito se carga aquí -->
-        </div>
+        <div class="modal-body" id="carritoContenido"></div>
     </div>
 </div>
 
-<!-- Modal de pago -->
-<div id="modalPago" class="modal">
+<!-- Modal de envío -->
+<div id="modalEnvio" class="modal">
     <div class="modal-contenido modal-pago">
         <div class="modal-header">
-            <h2>💳 Finalizar Compra</h2>
-            <span class="cerrar" onclick="cerrarModalPago()">&times;</span>
+            <h2>📦 Datos de Envío</h2>
+            <span class="cerrar" onclick="cerrarModalEnvio()">&times;</span>
         </div>
-        <div class="modal-body">
-            <div id="pagoContenido"></div>
-        </div>
+        <div class="modal-body" id="envioContenido"></div>
     </div>
 </div>
 
