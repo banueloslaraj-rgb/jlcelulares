@@ -1,19 +1,28 @@
 body{
 font-family: Arial;
-background:#0f0f0f;
+background:#0b0b0b;
 color:white;
 margin:0;
 }
 
 header{
 text-align:center;
-padding:20px;
+padding:30px;
 background:black;
+}
+
+header input{
+padding:10px;
+width:250px;
+margin-top:10px;
+border-radius:5px;
+border:none;
 }
 
 nav{
 text-align:center;
-margin:20px;
+padding:15px;
+background:#111;
 }
 
 button{
@@ -22,7 +31,12 @@ margin:5px;
 border:none;
 background:#007bff;
 color:white;
+border-radius:5px;
 cursor:pointer;
+}
+
+button:hover{
+background:#00a2ff;
 }
 
 #productos{
@@ -33,18 +47,31 @@ padding:20px;
 }
 
 .card{
-background:#1c1c1c;
+background:#1a1a1a;
 padding:15px;
 border-radius:10px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
 }
 
 .card img{
 width:100%;
+border-radius:5px;
 }
 
 .precio{
 color:#00ff9f;
 font-size:20px;
+font-weight:bold;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:black;
 }
 
 .whatsapp{
@@ -56,4 +83,5 @@ color:white;
 padding:15px;
 border-radius:50px;
 text-decoration:none;
+font-size:18px;
 }

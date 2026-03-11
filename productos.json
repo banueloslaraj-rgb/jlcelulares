@@ -1,31 +1,21 @@
 [
 {
 "nombre":"iPhone 13",
-"descripcion":"128GB | Batería 100% | Libre",
+"descripcion":"128GB | Batería 100%",
 "precio":"9500",
 "tipo":"celular",
-"imagen":"https://via.placeholder.com/300",
-"video":"https://youtube.com",
-"compra":"https://link.mercadopago.com"
+"imagen":"URL_IMAGEN",
+"video":"URL_VIDEO",
+"compra":"LINK_MERCADOPAGO"
 },
 
 {
-"nombre":"Samsung S21",
-"descripcion":"256GB | Excelente estado",
-"precio":"8200",
-"tipo":"celular",
-"imagen":"https://via.placeholder.com/300",
-"video":"https://youtube.com",
-"compra":"https://link.mercadopago.com"
-},
-
-{
-"nombre":"Audífonos Bluetooth",
-"descripcion":"Alta calidad de sonido",
-"precio":"350",
+"nombre":"Cargador iPhone",
+"descripcion":"Carga rápida",
+"precio":"250",
 "tipo":"accesorio",
-"imagen":"https://via.placeholder.com/300",
-"video":"https://youtube.com",
-"compra":"https://link.mercadopago.com"
+"imagen":"URL_IMAGEN",
+"video":"URL_VIDEO",
+"compra":"LINK_MERCADOPAGO"
 }
 ]
