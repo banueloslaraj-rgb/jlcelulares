@@ -1,7 +1,7 @@
 [
 {
 "nombre":"iPhone 11",
-"descripcion":"64GB | Batería 83% | Libre",
+"descripcion":"64GB | Batería 83% | Libre | Reacondicionado",
 "precio":"3199",
 "tipo":"celular",
 "imagen":"https://cdn.smart-gsm.com/img/picture/big/apple-iphone-11.jpg",
@@ -11,7 +11,7 @@
 
 {
 "nombre":"Samsung A06",
-"descripcion":"64GB | Usado",
+"descripcion":"64GB | Reacondicionado | Libre",
 "precio":"1799",
 "tipo":"celular",
 "imagen":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7d74dAAN0p-4jHuJl9K9aLTtLWGf4NUbTew&s",
@@ -31,10 +31,10 @@
 
 {
 "nombre":"eSIM Telcel",
-"descripcion":"Adquiere tu numero digital",
+"descripcion":"LADA a elegir",
 "precio":"250",
 "tipo":"servicio",
-"imagen":"",
+"imagen":"https://m.media-amazon.com/images/I/518WwCz4--L._AC_UF350,350_QL80_.jpg",
 "video":"https://youtube.com",
 "compra":"https://link.mercadopago.com"
 }
