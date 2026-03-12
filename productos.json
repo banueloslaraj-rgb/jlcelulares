@@ -255,6 +255,46 @@
 "video":"https://youtube.com"
 },
 {
+"nombre":"Chip Telcel",
+"descripcion":"LADA a elegir | Incluye 50 de Saldo",
+"precio":100,
+"tipo":"sim",
+"imagen":"https://i.postimg.cc/C1XJKdXD/Chip-Telcel.jpg",
+"video":"https://youtube.com"
+},
+{
+"nombre":"Chip AT&T",
+"descripcion":"LADA a elegir | Incluye 50 de Saldo",
+"precio":100,
+"tipo":"sim",
+"imagen":"https://i.postimg.cc/gkqyCMzH/chip-att.jpg",
+"video":"https://youtube.com"
+},
+{
+"nombre":"Chip Unefon",
+"descripcion":"LADA a elegir | Incluye 50 de Saldo",
+"precio":100,
+"tipo":"sim",
+"imagen":"https://i.postimg.cc/8PHWKj4x/Chip-Unefon.jpg",
+"video":"https://youtube.com"
+},
+{
+"nombre":"Chip Movistar",
+"descripcion":"LADA 311 | Incluye 60 de Saldo",
+"precio":100,
+"tipo":"sim",
+"imagen":"https://i.postimg.cc/zBrGYkXP/Chip-Movistar.jpg",
+"video":"https://youtube.com"
+},
+{
+"nombre":"Chip Bait",
+"descripcion":"LADA al Azar | Incluye 100 de Saldo",
+"precio":100,
+"tipo":"sim",
+"imagen":"https://i.postimg.cc/hG9Ks7bh/Chip-Bait.jpg",
+"video":"https://youtube.com"
+},
+{
 "nombre":"Instalación Paqueteria Office",
 "descripcion":"Instalación Remota | Instalación Presencial en Establecimiento",
 "precio":280,
@@ -282,7 +322,7 @@
 "nombre":"Rollos de Papel Impresora Termica 58mm",
 "descripcion":"Paquete de 10 Piezas | 58mm",
 "precio":198,
-"tipo":"terminales",
+"tipo":"impresoras",
 "imagen":"https://i.postimg.cc/hvCpLf7P/Rollos-58mm.jpg",
 "video":"https://youtube.com"
 },
