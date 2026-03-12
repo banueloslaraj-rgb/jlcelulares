@@ -11,6 +11,7 @@ async function cargarProductos(){
     }))
     
     window.listaProductos = productosProcesados
+    console.log('Productos cargados:', productosProcesados) // Para verificar
     mostrar(productosProcesados)
 }
 
@@ -27,8 +28,7 @@ function mostrar(lista){
     lista.forEach((p) => {
         const precioFormateado = p.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         
-        // IMPORTANTE: Aquí cambiamos la forma de pasar el ID
-        // Usamos comillas dobles para el onclick y pasamos el ID como número
+        // IMPORTANTE: Usamos comillas dobles para el onclick y pasamos el ID entre comillas simples
         contenedor.innerHTML += `
         <div class="card">
             <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/300?text=Imagen+no+disponible'">
@@ -37,7 +37,7 @@ function mostrar(lista){
             <p class="precio">$${precioFormateado}</p>
             <a href="${p.video}" target="_blank">🎥 Ver video</a>
             <br><br>
-            <button onclick="agregarPorId(${p.id})">Agregar al carrito</button>
+            <button onclick="agregarPorId('${p.id}')">Agregar al carrito</button>
         </div>
         `
     })
@@ -53,15 +53,17 @@ function filtrar(tipo){
 }
 
 function agregarPorId(id) {
-    // Convertir a número por si acaso viene como string
-    const idNumero = Number(id)
+    console.log('ID recibido:', id, 'Tipo:', typeof id)
+    console.log('Productos disponibles:', window.listaProductos)
     
-    // Buscar el producto por ID (comparando como números)
-    const producto = window.listaProductos.find(p => p.id === idNumero)
+    // Buscar el producto comparando como string o como número
+    const producto = window.listaProductos.find(p => 
+        p.id.toString() === id.toString()  // Convertimos ambos a string para comparar
+    )
+    
+    console.log('Producto encontrado:', producto)
     
     if (!producto) {
-        console.log('Producto no encontrado. ID buscado:', idNumero)
-        console.log('Productos disponibles:', window.listaProductos)
         mostrarNotificacion('❌ Producto no encontrado')
         return
     }
@@ -70,7 +72,7 @@ function agregarPorId(id) {
     
     if(existe) {
         existe.cantidad++
-        mostrarNotificacion(`${producto.nombre} +1 (Total: ${existe.cantidad})`)
+        mostrarNotificacion(`✅ ${producto.nombre} +1 (Total: ${existe.cantidad})`)
     } else {
         carrito.push({
             ...producto,
@@ -318,7 +320,6 @@ function mostrarNotificacion(mensaje) {
     animation: slideUp 0.3s ease;
     `
     
-    // Si ya existe un estilo para la animación, no lo duplicamos
     if (!document.getElementById('notificacion-style')) {
         const style = document.createElement('style')
         style.id = 'notificacion-style'
