@@ -1,18 +1,17 @@
 let carrito = []
 let costoEnvio = 150
+let productosGlobales = [] // Guardamos todos los productos aquí
 
 async function cargarProductos(){
     const res = await fetch("productos.json")
     const productos = await res.json()
     
-    const productosProcesados = productos.map(p => ({
+    productosGlobales = productos.map(p => ({
         ...p,
         precio: Number(p.precio)
     }))
     
-    window.listaProductos = productosProcesados
-    console.log('Productos cargados:', productosProcesados) // Para verificar
-    mostrar(productosProcesados)
+    mostrar(productosGlobales)
 }
 
 function mostrar(lista){
@@ -25,54 +24,33 @@ function mostrar(lista){
     
     contenedor.innerHTML = ""
     
-    lista.forEach((p) => {
-        const precioFormateado = p.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    lista.forEach((producto) => {
+        const precioFormateado = producto.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         
-        // IMPORTANTE: Usamos comillas dobles para el onclick y pasamos el ID entre comillas simples
+        // Creamos un ID único temporal para el botón
+        const productoString = JSON.stringify(producto).replace(/"/g, '&quot;')
+        
         contenedor.innerHTML += `
         <div class="card">
-            <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/300?text=Imagen+no+disponible'">
-            <h3>${p.nombre}</h3>
-            <p>${p.descripcion}</p>
+            <img src="${producto.imagen}" alt="${producto.nombre}" onerror="this.src='https://via.placeholder.com/300?text=Imagen+no+disponible'">
+            <h3>${producto.nombre}</h3>
+            <p>${producto.descripcion}</p>
             <p class="precio">$${precioFormateado}</p>
-            <a href="${p.video}" target="_blank">🎥 Ver video</a>
+            <a href="${producto.video}" target="_blank">🎥 Ver video</a>
             <br><br>
-            <button onclick="agregarPorId('${p.id}')">Agregar al carrito</button>
+            <button onclick='agregarAlCarrito(${JSON.stringify(producto).replace(/'/g, "\\'")})'>Agregar al carrito</button>
         </div>
         `
     })
 }
 
-function filtrar(tipo){
-    if(tipo === "todos"){
-        mostrar(window.listaProductos)
-        return
-    }
-    const filtrados = window.listaProductos.filter(p => p.tipo === tipo)
-    mostrar(filtrados)
-}
-
-function agregarPorId(id) {
-    console.log('ID recibido:', id, 'Tipo:', typeof id)
-    console.log('Productos disponibles:', window.listaProductos)
-    
-    // Buscar el producto comparando como string o como número
-    const producto = window.listaProductos.find(p => 
-        p.id.toString() === id.toString()  // Convertimos ambos a string para comparar
-    )
-    
-    console.log('Producto encontrado:', producto)
-    
-    if (!producto) {
-        mostrarNotificacion('❌ Producto no encontrado')
-        return
-    }
-    
-    const existe = carrito.find(item => item.id === producto.id)
+function agregarAlCarrito(producto) {
+    // Buscar si el producto ya está en el carrito (por nombre)
+    const existe = carrito.find(item => item.nombre === producto.nombre)
     
     if(existe) {
         existe.cantidad++
-        mostrarNotificacion(`✅ ${producto.nombre} +1 (Total: ${existe.cantidad})`)
+        mostrarNotificacion(`${producto.nombre} +1 (Total: ${existe.cantidad})`)
     } else {
         carrito.push({
             ...producto,
@@ -82,6 +60,15 @@ function agregarPorId(id) {
     }
     
     actualizarContadorCarrito()
+}
+
+function filtrar(tipo){
+    if(tipo === "todos"){
+        mostrar(productosGlobales)
+        return
+    }
+    const filtrados = productosGlobales.filter(p => p.tipo === tipo)
+    mostrar(filtrados)
 }
 
 function verCarrito(){
@@ -344,7 +331,7 @@ function mostrarNotificacion(mensaje) {
 
 function buscar() {
     const texto = document.getElementById('buscador').value.toLowerCase()
-    const filtrados = window.listaProductos.filter(p => 
+    const filtrados = productosGlobales.filter(p => 
         p.nombre.toLowerCase().includes(texto) || 
         p.descripcion.toLowerCase().includes(texto)
     )
