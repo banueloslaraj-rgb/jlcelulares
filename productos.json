@@ -226,15 +226,15 @@
 "nombre":"eSIM Telcel",
 "descripcion":"LADA a elegir | Incluye de Saldo",
 "precio":250,
-"tipo":"servicio",
-"imagen":"https://m.media-amazon.com/images/I/518WwCz4--L._AC_UF350,350_QL80_.jpg",
+"tipo":"sim",
+"imagen":"https://i.postimg.cc/bw8V7D1F/Esim-Telcel-2.jpg",
 "video":"https://youtube.com"
 },
 {
 "nombre":"eSIM Bait",
 "descripcion":"LADA a elegir | Incluye 100 de saldo",
 "precio":250,
-"tipo":"servicio",
+"tipo":"sim",
 "imagen":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHZ2w-QmsiQdMml1JkIAFBaikZkX4acxNRmw&s",
 "video":"https://youtube.com"
 },
@@ -242,16 +242,56 @@
 "nombre":"eSIM Movistar",
 "descripcion":"LADA a elegir | Incluye 100 de Saldo",
 "precio":299,
-"tipo":"servicio",
+"tipo":"sim",
 "imagen":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxKvaa974A_2ehqOEgHxswcbzGEU-3Y5_riA&s",
 "video":"https://youtube.com"
 },
 {
 "nombre":"eSIM AT&T",
 "descripcion":"LADA a elegir | Incluye 100 de Saldo",
-"precio":299,
+"precio":250,
+"tipo":"sim",
+"imagen":"https://i.postimg.cc/2S2GgHkc/Esim-att.png",
+"video":"https://youtube.com"
+},
+{
+"nombre":"Instalación Paqueteria Office",
+"descripcion":"Instalación Remota | Instalación Presencial en Establecimiento",
+"precio":280,
 "tipo":"servicio",
-"imagen":"data:image/png;base64,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",
+"imagen":"https://i.postimg.cc/GmWt3Rmw/Paqueteria-Office.jpg",
+"video":"https://youtube.com"
+},
+{
+"nombre":"Puntos de Venta",
+"descripcion":"Abarrotes, Ferreterias, Fruterias, etc | Incluye Capacitación",
+"precio":13000,
+"tipo":"puntosVenta",
+"imagen":"https://i.postimg.cc/hGKF1ZCs/Punto-de-venta.jpg",
+"video":"https://youtube.com"
+},
+{
+"nombre":"Terminal Cobro con Tarjeta",
+"descripcion":"Creación de Cuenta | Incluye Capacitación",
+"precio":799,
+"tipo":"puntosVenta",
+"imagen":"https://i.postimg.cc/yYcD3wqS/Terminal-Mercado-Pago.jpg",
+"video":"https://youtube.com"
+},
+{
+"nombre":"Rollos de Papel Impresora Termica 58mm",
+"descripcion":"Paquete de 10 Piezas | 58mm",
+"precio":198,
+"tipo":"terminales",
+"imagen":"https://i.postimg.cc/hvCpLf7P/Rollos-58mm.jpg",
+"video":"https://youtube.com"
+},
+{
+"nombre":"Muletas",
+"descripcion":"Totalmente Ajustables | Para Pacientes que Miden desde 1.58m a 2.02m",
+"precio":500,
+"tipo":"ortopedia",
+"imagen":"https://i.postimg.cc/sXQ8DPB4/Muletas.jpg",
 "video":"https://youtube.com"
 }
 ]
