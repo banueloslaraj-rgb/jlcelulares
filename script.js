@@ -27,6 +27,8 @@ function mostrar(lista){
     lista.forEach((p) => {
         const precioFormateado = p.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         
+        // IMPORTANTE: Aquí cambiamos la forma de pasar el ID
+        // Usamos comillas dobles para el onclick y pasamos el ID como número
         contenedor.innerHTML += `
         <div class="card">
             <img src="${p.imagen}" alt="${p.nombre}" onerror="this.src='https://via.placeholder.com/300?text=Imagen+no+disponible'">
@@ -51,9 +53,15 @@ function filtrar(tipo){
 }
 
 function agregarPorId(id) {
-    const producto = window.listaProductos.find(p => p.id === id)
+    // Convertir a número por si acaso viene como string
+    const idNumero = Number(id)
+    
+    // Buscar el producto por ID (comparando como números)
+    const producto = window.listaProductos.find(p => p.id === idNumero)
     
     if (!producto) {
+        console.log('Producto no encontrado. ID buscado:', idNumero)
+        console.log('Productos disponibles:', window.listaProductos)
         mostrarNotificacion('❌ Producto no encontrado')
         return
     }
@@ -62,15 +70,16 @@ function agregarPorId(id) {
     
     if(existe) {
         existe.cantidad++
+        mostrarNotificacion(`${producto.nombre} +1 (Total: ${existe.cantidad})`)
     } else {
         carrito.push({
             ...producto,
             cantidad: 1
         })
+        mostrarNotificacion(`✅ ${producto.nombre} agregado`)
     }
     
     actualizarContadorCarrito()
-    mostrarNotificacion(`${producto.nombre} agregado`)
 }
 
 function verCarrito(){
@@ -309,20 +318,24 @@ function mostrarNotificacion(mensaje) {
     animation: slideUp 0.3s ease;
     `
     
-    const style = document.createElement('style')
-    style.textContent = `
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translate(-50%, 20px);
+    // Si ya existe un estilo para la animación, no lo duplicamos
+    if (!document.getElementById('notificacion-style')) {
+        const style = document.createElement('style')
+        style.id = 'notificacion-style'
+        style.textContent = `
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, 20px);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
         }
-        to {
-            opacity: 1;
-            transform: translate(-50%, 0);
-        }
+        `
+        document.head.appendChild(style)
     }
-    `
-    document.head.appendChild(style)
     
     document.body.appendChild(notif)
     setTimeout(() => notif.remove(), 2000)
