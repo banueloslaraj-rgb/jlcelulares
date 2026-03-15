@@ -26,7 +26,9 @@ function mostrar(lista){
     
     lista.forEach((producto) => {
         const precioFormateado = producto.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        const productoJSON = JSON.stringify(producto).replace(/'/g, "\\'")
+        
+        // Creamos un ID único temporal para el botón
+        const productoString = JSON.stringify(producto).replace(/"/g, '&quot;')
         
         contenedor.innerHTML += `
         <div class="card">
@@ -36,9 +38,7 @@ function mostrar(lista){
             <p class="precio">$${precioFormateado}</p>
             <a href="${producto.video}" target="_blank">🎥 Ver video</a>
             <br><br>
-            <button data-producto='${productoJSON}' onclick='agregarAlCarrito(JSON.parse(this.dataset.producto))'>
-                Agregar al carrito
-            </button>
+            <button onclick='agregarAlCarrito(${JSON.stringify(producto).replace(/'/g, "\\'")})'>Agregar al carrito</button>
         </div>
         `
     })
