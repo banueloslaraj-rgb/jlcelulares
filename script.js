@@ -3,44 +3,61 @@ let costoEnvio = 150
 let productosGlobales = [] // Guardamos todos los productos aquí
 
 async function cargarProductos(){
-    const res = await fetch("productos.json")
-    const productos = await res.json()
-    
-    productosGlobales = productos.map(p => ({
-        ...p,
-        precio: Number(p.precio)
-    }))
-    
-    mostrar(productosGlobales)
+    try {
+        const res = await fetch("productos.json")
+        if (!res.ok) {
+            throw new Error(`Error HTTP: ${res.status}`)
+        }
+        const productos = await res.json()
+        
+        productosGlobales = productos.map(p => ({
+            ...p,
+            precio: Number(p.precio)
+        }))
+        
+        mostrar(productosGlobales)
+        console.log('✅ Productos cargados:', productosGlobales.length)
+    } catch (error) {
+        console.error('❌ Error al cargar productos:', error)
+        document.getElementById('productos').innerHTML = `
+            <p style="text-align:center; color:red; grid-column: 1/-1;">
+                Error al cargar productos. Verifica que el archivo productos.json existe y tiene el formato correcto.
+            </p>
+        `
+    }
 }
 
 function mostrar(lista){
     const contenedor = document.getElementById("productos")
     
     if(!lista || lista.length === 0) {
-        contenedor.innerHTML = "<p style='text-align:center;'>No hay productos</p>"
+        contenedor.innerHTML = "<p style='text-align:center; grid-column: 1/-1; padding: 40px;'>No hay productos en esta categoría</p>"
         return
     }
     
     contenedor.innerHTML = ""
     
     lista.forEach((producto) => {
-        const precioFormateado = producto.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        const precioFormateado = producto.precio.toLocaleString('es-MX')
         
-        // Creamos un ID único temporal para el botón
-        const productoString = JSON.stringify(producto).replace(/"/g, '&quot;')
+        const card = document.createElement('div')
+        card.className = 'card'
         
-        contenedor.innerHTML += `
-        <div class="card">
-            <img src="${producto.imagen}" alt="${producto.nombre}" onerror="this.src='https://via.placeholder.com/300?text=Imagen+no+disponible'">
+        card.innerHTML = `
+            <img src="${producto.imagen}" alt="${producto.nombre}" onerror="this.src='https://via.placeholder.com/300x200?text=Imagen+no+disponible'">
             <h3>${producto.nombre}</h3>
             <p>${producto.descripcion}</p>
             <p class="precio">$${precioFormateado}</p>
-            <a href="${producto.video}" target="_blank">🎥 Ver video</a>
-            <br><br>
-            <button onclick='agregarAlCarrito(${JSON.stringify(producto).replace(/'/g, "\\'")})'>Agregar al carrito</button>
-        </div>
+            ${producto.video ? `<a href="${producto.video}" target="_blank">🎥 Ver video</a>` : ''}
+            <button class="btn-agregar" data-producto='${JSON.stringify(producto).replace(/'/g, "\\'").replace(/"/g, '&quot;')}'>Agregar al carrito</button>
         `
+        
+        const btnAgregar = card.querySelector('.btn-agregar')
+        btnAgregar.addEventListener('click', () => {
+            agregarAlCarrito(producto)
+        })
+        
+        contenedor.appendChild(card)
     })
 }
 
@@ -90,7 +107,7 @@ function actualizarVistaCarrito() {
     
     if(carrito.length === 0) {
         contenido.innerHTML = `
-        <p style="text-align:center;padding:20px;">El carrito está vacío</p>
+        <p style="text-align:center;padding:40px;">🛒 El carrito está vacío</p>
         <div class="acciones-carrito">
             <button class="btn-secundario" onclick="cerrarModal()">Seguir comprando</button>
         </div>
@@ -212,12 +229,12 @@ function mostrarFormularioEnvio() {
 }
 
 function enviarPedidoWhatsApp() {
-    const nombre = document.getElementById('nombre')?.value
-    const telefono = document.getElementById('telefono')?.value
-    const direccion = document.getElementById('direccion')?.value
-    const ciudad = document.getElementById('ciudad')?.value
-    const estado = document.getElementById('estado')?.value
-    const cp = document.getElementById('cp')?.value
+    const nombre = document.getElementById('nombre')?.value?.trim()
+    const telefono = document.getElementById('telefono')?.value?.trim()
+    const direccion = document.getElementById('direccion')?.value?.trim()
+    const ciudad = document.getElementById('ciudad')?.value?.trim()
+    const estado = document.getElementById('estado')?.value?.trim()
+    const cp = document.getElementById('cp')?.value?.trim()
     
     if(!nombre || !telefono || !direccion || !ciudad || !estado || !cp) {
         mostrarNotificacion('❌ Completa todos los campos')
@@ -246,7 +263,7 @@ function enviarPedidoWhatsApp() {
     
     mensaje += "¡Gracias por tu compra! 🙌"
     
-    window.open(`https://wa.me/523111063251?text=${mensaje}`)
+    window.open(`https://wa.me/523111063251?text=${mensaje}`, '_blank')
     
     cerrarModalEnvio()
     carrito = []
@@ -270,7 +287,7 @@ function eliminarDelCarrito(index) {
     carrito.splice(index, 1)
     actualizarVistaCarrito()
     actualizarContadorCarrito()
-    mostrarNotificacion('Producto eliminado')
+    mostrarNotificacion('❌ Producto eliminado')
 }
 
 function vaciarCarrito() {
@@ -278,12 +295,12 @@ function vaciarCarrito() {
         carrito = []
         actualizarVistaCarrito()
         actualizarContadorCarrito()
-        mostrarNotificacion('Carrito vaciado')
+        mostrarNotificacion('🔄 Carrito vaciado')
     }
 }
 
 function actualizarContadorCarrito() {
-    const botonCarrito = document.querySelector('button[onclick="verCarrito()"]')
+    const botonCarrito = document.querySelector('.btn-carrito')
     if (botonCarrito) {
         const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0)
         botonCarrito.textContent = `🛒 Ver carrito (${totalItems})`
@@ -291,7 +308,12 @@ function actualizarContadorCarrito() {
 }
 
 function mostrarNotificacion(mensaje) {
+    // Eliminar notificaciones anteriores
+    const notificacionesPrevias = document.querySelectorAll('.notificacion')
+    notificacionesPrevias.forEach(n => n.remove())
+    
     const notif = document.createElement('div')
+    notif.className = 'notificacion'
     notif.textContent = mensaje
     notif.style.cssText = `
     position: fixed;
@@ -300,11 +322,12 @@ function mostrarNotificacion(mensaje) {
     transform: translateX(-50%);
     background: #00a86b;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 24px;
     border-radius: 30px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    z-index: 2000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    z-index: 3000;
     animation: slideUp 0.3s ease;
+    font-weight: 500;
     `
     
     if (!document.getElementById('notificacion-style')) {
@@ -326,11 +349,19 @@ function mostrarNotificacion(mensaje) {
     }
     
     document.body.appendChild(notif)
-    setTimeout(() => notif.remove(), 2000)
+    setTimeout(() => {
+        if (notif.parentNode) {
+            notif.remove()
+        }
+    }, 2000)
 }
 
 function buscar() {
-    const texto = document.getElementById('buscador').value.toLowerCase()
+    const texto = document.getElementById('buscador').value.toLowerCase().trim()
+    if (texto === '') {
+        mostrar(productosGlobales)
+        return
+    }
     const filtrados = productosGlobales.filter(p => 
         p.nombre.toLowerCase().includes(texto) || 
         p.descripcion.toLowerCase().includes(texto)
@@ -338,6 +369,7 @@ function buscar() {
     mostrar(filtrados)
 }
 
+// Cerrar modales al hacer clic fuera
 window.onclick = function(event) {
     const modalCarrito = document.getElementById('modalCarrito')
     const modalEnvio = document.getElementById('modalEnvio')
@@ -345,4 +377,5 @@ window.onclick = function(event) {
     if (event.target == modalEnvio) modalEnvio.style.display = 'none'
 }
 
-cargarProductos()
+// Cargar productos cuando la página esté lista
+document.addEventListener('DOMContentLoaded', cargarProductos)
