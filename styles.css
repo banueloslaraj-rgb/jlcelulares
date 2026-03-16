@@ -3,30 +3,6 @@ body{
     background:#f5f7fb;
     color:#333;
     margin:0;
-    padding-top: 70px; /* Espacio para el botón fijo */
-}
-
-/* BOTÓN CARRITO FIJO MEJORADO */
-.btn-carrito {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 1000;
-    padding: 12px 22px;
-    background: #00a86b;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    transition: all 0.3s;
-}
-
-.btn-carrito:hover {
-    background: #00955e;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
 }
 
 /* HEADER */
@@ -35,7 +11,6 @@ header{
     padding:40px 20px;
     background:linear-gradient(135deg,#0d6efd,#3aa0ff);
     color:white;
-    margin-top: 0;
 }
 
 header h1{
@@ -66,11 +41,6 @@ nav {
     justify-content: center;
     gap: 8px;
     padding: 15px 10px;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 900;
 }
 
 button{
@@ -83,7 +53,7 @@ button{
     font-weight:600;
     cursor:pointer;
     transition:all 0.3s;
-    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
 }
 
 button:hover{
@@ -94,7 +64,7 @@ button:hover{
 /* PRODUCTOS */
 #productos{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
     gap:25px;
     padding:40px;
 }
@@ -106,8 +76,6 @@ button:hover{
     border-radius:15px;
     box-shadow:0 6px 20px rgba(0,0,0,0.08);
     transition:all 0.3s;
-    display: flex;
-    flex-direction: column;
 }
 
 .card:hover{
@@ -118,28 +86,20 @@ button:hover{
 .card img{
     width:100%;
     border-radius:10px;
-    height: 200px;
-    object-fit: cover;
-    background: #f5f5f5;
+    height: auto;
+    max-height: 250px;
+    object-fit: contain;
 }
 
 .card h3{
     margin-top:10px;
-    font-size: 18px;
-}
-
-.card p{
-    flex-grow: 1;
-    color: #666;
-    font-size: 14px;
-    line-height: 1.4;
 }
 
 .precio{
     color:#00a86b;
-    font-size:24px;
+    font-size:22px;
     font-weight:bold;
-    margin:10px 0;
+    margin-top:5px;
 }
 
 .card a {
@@ -150,18 +110,9 @@ button:hover{
     font-weight: 500;
 }
 
-.card a:hover {
-    text-decoration: underline;
-}
-
 .card button {
     width: 100%;
     margin-top: 10px;
-    background: #00a86b;
-}
-
-.card button:hover {
-    background: #00955e;
 }
 
 /* MODAL */
@@ -179,7 +130,7 @@ button:hover{
 
 .modal-contenido {
     background-color: #fefefe;
-    margin: 50px auto;
+    margin: 30px auto;
     padding: 20px;
     border-radius: 20px;
     width: 90%;
@@ -271,7 +222,6 @@ button:hover{
     border-radius: 5px;
     font-size: 16px;
     cursor: pointer;
-    min-width: 30px;
 }
 
 .btn-cantidad:hover {
@@ -281,9 +231,8 @@ button:hover{
 .item-eliminar {
     color: #dc3545;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 20px;
     margin-left: 15px;
-    font-weight: bold;
 }
 
 .item-eliminar:hover {
@@ -342,7 +291,6 @@ button:hover{
     background: #25D366;
     font-size: 18px;
     margin-top: 10px;
-    color: white;
 }
 
 .btn-whatsapp:hover {
@@ -418,10 +366,6 @@ footer{
     margin-top:40px;
 }
 
-footer p {
-    margin: 5px 0;
-}
-
 /* BOTON WHATSAPP FLOTANTE */
 .whatsapp{
     position:fixed;
@@ -441,32 +385,30 @@ footer p {
 
 .whatsapp:hover{
     transform:scale(1.05);
-    background: #20B858;
+}
+
+/* Botón ver carrito superior */
+body > button:first-of-type {
+    position: sticky;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+    margin: 10px;
 }
 
 /* VERSIÓN MÓVIL */
 @media (max-width: 600px) {
-    body {
-        padding-top: 60px;
-    }
-    
-    .btn-carrito {
-        width: calc(100% - 20px);
-        left: 10px;
-        right: 10px;
-        text-align: center;
-    }
-    
+
     header {
         padding: 30px 15px;
     }
 
     header h1 {
-        font-size: 28px;
+        font-size: 32px;
     }
 
     header p {
-        font-size: 14px;
+        font-size: 16px;
         padding: 0 10px;
     }
 
@@ -475,26 +417,21 @@ footer p {
         max-width: 300px;
     }
 
-    nav {
-        padding: 10px 5px;
-        gap: 5px;
-    }
-    
     button {
-        padding: 8px 12px;
-        font-size: 13px;
+        padding: 10px 16px;
+        font-size: 14px;
         flex: 1 1 auto;
-        min-width: auto;
+        min-width: 100px;
     }
 
     #productos {
         grid-template-columns: 1fr;
         gap: 15px;
-        padding: 15px;
+        padding: 20px 15px;
     }
 
     .card {
-        padding: 12px;
+        padding: 15px;
     }
 
     .card h3 {
@@ -502,15 +439,39 @@ footer p {
     }
 
     .card p {
-        font-size: 13px;
+        font-size: 14px;
+        margin: 8px 0;
     }
 
     .precio {
         font-size: 20px;
     }
 
+    footer {
+        padding: 25px 15px;
+        font-size: 14px;
+    }
+
+    footer p {
+        margin: 8px 0;
+    }
+
+    .whatsapp {
+        bottom: 15px;
+        right: 15px;
+        padding: 12px 18px;
+        font-size: 14px;
+    }
+
+    body > button:first-of-type {
+        width: calc(100% - 20px);
+        margin: 10px;
+        position: sticky;
+        top: 10px;
+    }
+
     .modal-contenido {
-        margin: 20px 10px;
+        margin: 10px;
         padding: 15px;
         width: auto;
     }
@@ -522,12 +483,5 @@ footer p {
 
     .acciones-carrito {
         flex-direction: column;
-    }
-    
-    .whatsapp {
-        bottom: 15px;
-        right: 15px;
-        padding: 10px 16px;
-        font-size: 14px;
     }
 }
