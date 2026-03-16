@@ -336,6 +336,30 @@
         "video":"https://youtube.com"
     },
     {
+        "nombre":"Laptop Dell Intel Core i5",
+        "descripcion":"Windows 11 | Pantalla Estrellada (No afecta) | 256gb SSD NVMe | 8gb RAM",
+        "precio":3499,
+        "tipo":"laptop",
+        "imagen":"https://i.postimg.cc/6QFpXsWM/Lpatops-Dell-i5.jpg",
+        "video":"https://youtube.com"
+    },
+    {
+        "nombre":"Laptop Dell Intel Core i3",
+        "descripcion":"Windows 11 | Detalles Esteticos y Tecla Retroceso | 256gb SSD NVMe | 4gb RAM",
+        "precio":3999,
+        "tipo":"laptop",
+        "imagen":"https://i.postimg.cc/nrGFBCvs/Laptop-Dell-i3.jpg",
+        "video":"https://youtube.com"
+    },
+    {
+        "nombre":"Laptop Huawei Matebook D15 AMD Rayzen 7",
+        "descripcion":"Windows 11  | 512gb SSD NVMe | 16gb RAM",
+        "precio":12999,
+        "tipo":"laptop",
+        "imagen":"https://i.postimg.cc/FFys2n2Z/Laptop-Huawei-D15.jpg",
+        "video":"https://youtube.com"
+    },
+    {
         "nombre":"Muletas",
         "descripcion":"Totalmente Ajustables | Para Pacientes que Miden desde 1.58m a 2.02m",
         "precio":500,
