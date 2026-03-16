@@ -1,370 +1,370 @@
 [
     {
-        "nombre":"iPhone 6",
-        "descripcion":"16GB | Batería 100% | Libre | Bypass con Señal",
-        "precio":899,
-        "tipo":"celular",
-        "imagen":"https://i.postimg.cc/Z5bbQfq8/i-Phone-6.jpg",
-        "video":"https://youtube.com/shorts/SMVdT-5doO8?si=Fa5aP4pw6mvso4la"
+        "nombre": "iPhone 6",
+        "descripcion": "16GB | Batería 100% | Libre | Bypass con Señal",
+        "precio": 899,
+        "tipo": "celular",
+        "imagen": "https://i.postimg.cc/Z5bbQfq8/i-Phone-6.jpg",
+        "video": "https://youtube.com/shorts/SMVdT-5doO8?si=Fa5aP4pw6mvso4la"
     },
     {
-        "nombre":"iPhone 11",
-        "descripcion":"64GB | Batería 83% | Libre | Reacondicionado",
-        "precio":3299,
-        "tipo":"celular",
-        "imagen":"https://cdn.smart-gsm.com/img/picture/big/apple-iphone-11.jpg",
-        "video":"https://youtube.com/shorts/w1KHfhfkdac?si=iiKdW_T9IcwKIqMx"
+        "nombre": "iPhone 11",
+        "descripcion": "64GB | Batería 83% | Libre | Reacondicionado",
+        "precio": 3299,
+        "tipo": "celular",
+        "imagen": "https://cdn.smart-gsm.com/img/picture/big/apple-iphone-11.jpg",
+        "video": "https://youtube.com/shorts/w1KHfhfkdac?si=iiKdW_T9IcwKIqMx"
     },
     {
-        "nombre":"iPhone 12",
-        "descripcion":"128GB | Batería 79% | Libre | Reacondicionado",
-        "precio":3500,
-        "tipo":"celular",
-        "imagen":"https://i.postimg.cc/664yV17d/i-Phone-12.jpg",
-        "video":"https://youtube.com/shorts/33cgp2l9dWY?si=XQxJdm4pSCPTg3c2"
+        "nombre": "iPhone 12",
+        "descripcion": "128GB | Batería 79% | Libre | Reacondicionado",
+        "precio": 3500,
+        "tipo": "celular",
+        "imagen": "https://i.postimg.cc/664yV17d/i-Phone-12.jpg",
+        "video": "https://youtube.com/shorts/33cgp2l9dWY?si=XQxJdm4pSCPTg3c2"
     },
     {
-        "nombre":"iPhone 12 pro",
-        "descripcion":"128GB | Batería 100% | Libre | Reacondicionado",
-        "precio":4599,
-        "tipo":"celular",
-        "imagen":"https://givu.mx/wp-content/uploads/2024/07/12progris.png",
-        "video":"https://youtube.com/shorts/3PpSWS8wnyI?si=NkFJtVZrGAgn2nZ1"
+        "nombre": "iPhone 12 pro",
+        "descripcion": "128GB | Batería 100% | Libre | Reacondicionado",
+        "precio": 4599,
+        "tipo": "celular",
+        "imagen": "https://givu.mx/wp-content/uploads/2024/07/12progris.png",
+        "video": "https://youtube.com/shorts/3PpSWS8wnyI?si=NkFJtVZrGAgn2nZ1"
     },
     {
-        "nombre":"iPhone 14",
-        "descripcion":"128GB | Batería 83% | Libre | Dual Sim | Reacondicionado",
-        "precio":6599,
-        "tipo":"celular",
-        "imagen":"https://content.macstore.mx/img/sku/IPHONE623_FZ.jpg",
-        "video":"https://youtube.com/shorts/aZZQmWWQ7h0?si=Lf7pqbNb32TbWkE4"
+        "nombre": "iPhone 14",
+        "descripcion": "128GB | Batería 83% | Libre | Dual Sim | Reacondicionado",
+        "precio": 6599,
+        "tipo": "celular",
+        "imagen": "https://content.macstore.mx/img/sku/IPHONE623_FZ.jpg",
+        "video": "https://youtube.com/shorts/aZZQmWWQ7h0?si=Lf7pqbNb32TbWkE4"
     },
     {
-        "nombre":"iPhone 15",
-        "descripcion":"128GB | Batería 100% | Libre | Dual Sim | Reacondicionado",
-        "precio":7799,
-        "tipo":"celular",
-        "imagen":"https://i.postimg.cc/QCVQcsGJ/i-Phone-15.jpg",
-        "video":"https://youtube.com/shorts/pcKlNEVwRJc?si=hQnG4xMH9EmBkztr"
+        "nombre": "iPhone 15",
+        "descripcion": "128GB | Batería 100% | Libre | Dual Sim | Reacondicionado",
+        "precio": 7799,
+        "tipo": "celular",
+        "imagen": "https://i.postimg.cc/QCVQcsGJ/i-Phone-15.jpg",
+        "video": "https://youtube.com/shorts/pcKlNEVwRJc?si=hQnG4xMH9EmBkztr"
     },
     {
-        "nombre":"Samsung A06",
-        "descripcion":"64GB | Reacondicionado | Libre",
-        "precio":1799,
-        "tipo":"celular",
-        "imagen":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7d74dAAN0p-4jHuJl9K9aLTtLWGf4NUbTew&s",
-        "video":"https://youtube.com/shorts/Ozbv7YY3Img?si=HovJAIuqfKsx9NQR"
+        "nombre": "Samsung A06",
+        "descripcion": "64GB | Reacondicionado | Libre",
+        "precio": 1799,
+        "tipo": "celular",
+        "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7d74dAAN0p-4jHuJl9K9aLTtLWGf4NUbTew&s",
+        "video": "https://youtube.com/shorts/Ozbv7YY3Img?si=HovJAIuqfKsx9NQR"
     },
     {
-        "nombre":"Audífonos Bluetooth",
-        "descripcion":"Alta calidad de sonido",
-        "precio":350,
-        "tipo":"accesorio",
-        "imagen":"https://via.placeholder.com/300",
-        "video":"https://youtube.com"
+        "nombre": "Audífonos Bluetooth",
+        "descripcion": "Alta calidad de sonido",
+        "precio": 350,
+        "tipo": "accesorio",
+        "imagen": "https://via.placeholder.com/300",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cubo de Carga 20w",
-        "descripcion":"Alta calidad de carga 20W",
-        "precio":150,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/fbkw1Qrm/Cubo1HR20W.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cubo de Carga 20w",
+        "descripcion": "Alta calidad de carga 20W",
+        "precio": 150,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/fbkw1Qrm/Cubo1HR20W.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cable iPhone USB",
-        "descripcion":"Buena calidad de carga",
-        "precio":70,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/jjFt63vQ/Cablei-PUSB.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cable iPhone USB",
+        "descripcion": "Buena calidad de carga",
+        "precio": 70,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/jjFt63vQ/Cablei-PUSB.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cable iPhone USB 1HR",
-        "descripcion":"Buena calidad de carga",
-        "precio":70,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/3xqctM51/Cablei-Phone-USB1HR.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cable iPhone USB 1HR",
+        "descripcion": "Buena calidad de carga",
+        "precio": 70,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/3xqctM51/Cablei-Phone-USB1HR.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cable iPhone Tipo C a Lightning",
-        "descripcion":"Buena calidad de carga",
-        "precio":150,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/QM50SHqM/Cable-Tipo-C-i-Phone.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cable iPhone Tipo C a Lightning",
+        "descripcion": "Buena calidad de carga",
+        "precio": 150,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/QM50SHqM/Cable-Tipo-C-i-Phone.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cable iPhone Tipo C a Tipo C",
-        "descripcion":"Buena calidad de carga",
-        "precio":150,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/CLBDb970/Cable-i-Phone-Tipo-C-a-Tipo-C.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cable iPhone Tipo C a Tipo C",
+        "descripcion": "Buena calidad de carga",
+        "precio": 150,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/CLBDb970/Cable-i-Phone-Tipo-C-a-Tipo-C.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cable iPhone a Auxiliar",
-        "descripcion":"Buena calidad de sonido",
-        "precio":90,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/90vDxFpn/Cable-i-Phone-a-Auxiliar.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cable iPhone a Auxiliar",
+        "descripcion": "Buena calidad de sonido",
+        "precio": 90,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/90vDxFpn/Cable-i-Phone-a-Auxiliar.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cargador Carga Rapida iPhone 35W",
-        "descripcion":"Buena calidad de carga",
-        "precio":299,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/BnCxvHN1/Cargador-Carga-Rapida-i-Phone.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cargador Carga Rapida iPhone 35W",
+        "descripcion": "Buena calidad de carga",
+        "precio": 299,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/BnCxvHN1/Cargador-Carga-Rapida-i-Phone.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cargador Carga Rapida iPhone Tipo C 35W",
-        "descripcion":"Buena calidad de carga",
-        "precio":349,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/nhLLvmp8/Cragador-Carga-Rapido-Tipo-C-i-Phone.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cargador Carga Rapida iPhone Tipo C 35W",
+        "descripcion": "Buena calidad de carga",
+        "precio": 349,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/nhLLvmp8/Cragador-Carga-Rapido-Tipo-C-i-Phone.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cable Usb a Tipo C",
-        "descripcion":"Buena calidad de carga",
-        "precio":70,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/KjNZTGWM/Cable-USB-tipo-C.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cable Usb a Tipo C",
+        "descripcion": "Buena calidad de carga",
+        "precio": 70,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/KjNZTGWM/Cable-USB-tipo-C.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cable Tipo C a Tipo C 1HR",
-        "descripcion":"Buena calidad de carga",
-        "precio":70,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/tTpwx3Gf/Cable-Tipo-C-a-Tipo-C-1HR.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cable Tipo C a Tipo C 1HR",
+        "descripcion": "Buena calidad de carga",
+        "precio": 70,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/tTpwx3Gf/Cable-Tipo-C-a-Tipo-C-1HR.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cable Tipo C a Auxiliar",
-        "descripcion":"Buena calidad de carga",
-        "precio":90,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/j2C8Hvgf/Cable-Tipo-C-a-Auxiliar.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cable Tipo C a Auxiliar",
+        "descripcion": "Buena calidad de carga",
+        "precio": 90,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/j2C8Hvgf/Cable-Tipo-C-a-Auxiliar.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cargador Tipo C Carga Rapida 25W",
-        "descripcion":"Buena calidad de carga",
-        "precio":180,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/VkFVcSCH/Cragador-Carga-rapida-Tipo-C.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cargador Tipo C Carga Rapida 25W",
+        "descripcion": "Buena calidad de carga",
+        "precio": 180,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/VkFVcSCH/Cragador-Carga-rapida-Tipo-C.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cargador Tipo C Normal",
-        "descripcion":"Buena calidad de carga",
-        "precio":90,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/ZnFryNZN/Cargador-Carga-Normal-Tipo-C.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cargador Tipo C Normal",
+        "descripcion": "Buena calidad de carga",
+        "precio": 90,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/ZnFryNZN/Cargador-Carga-Normal-Tipo-C.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cable V8",
-        "descripcion":"Buena calidad de carga",
-        "precio":70,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/BQn8CkC3/Cable-v8.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cable V8",
+        "descripcion": "Buena calidad de carga",
+        "precio": 70,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/BQn8CkC3/Cable-v8.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Bateria Portatil",
-        "descripcion":"Buena calidad de carga",
-        "precio":350,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/vZ6Zqsxb/Bateria-Portatil.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Bateria Portatil",
+        "descripcion": "Buena calidad de carga",
+        "precio": 350,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/vZ6Zqsxb/Bateria-Portatil.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Bateria MagSafe",
-        "descripcion":"Buena calidad de carga",
-        "precio":299,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/7LkwKTyS/Bateria-Magsafe.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Bateria MagSafe",
+        "descripcion": "Buena calidad de carga",
+        "precio": 299,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/7LkwKTyS/Bateria-Magsafe.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Cargador MagSafe",
-        "descripcion":"Buena calidad de carga",
-        "precio":250,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/GtBWLc1Z/Cargador-Mag-Safe.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Cargador MagSafe",
+        "descripcion": "Buena calidad de carga",
+        "precio": 250,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/GtBWLc1Z/Cargador-Mag-Safe.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Memoria USB 128gb",
-        "descripcion":"Buena calidad",
-        "precio":220,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/FFdFsvGp/Memoria-USB-128gb.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Memoria USB 128gb",
+        "descripcion": "Buena calidad",
+        "precio": 220,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/FFdFsvGp/Memoria-USB-128gb.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Memoria USB 64gb",
-        "descripcion":"Buena calidad",
-        "precio":180,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/FFdFsvGp/Memoria-USB-128gb.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Memoria USB 64gb",
+        "descripcion": "Buena calidad",
+        "precio": 180,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/FFdFsvGp/Memoria-USB-128gb.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Memoria USB 16gb",
-        "descripcion":"Buena calidad",
-        "precio":150,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/FFdFsvGp/Memoria-USB-128gb.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Memoria USB 16gb",
+        "descripcion": "Buena calidad",
+        "precio": 150,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/FFdFsvGp/Memoria-USB-128gb.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Audifonos Alambricos",
-        "descripcion":"Buena calidad",
-        "precio":60,
-        "tipo":"accesorio",
-        "imagen":"https://i.postimg.cc/85LytjNF/Audifonos-Alambricos.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Audifonos Alambricos",
+        "descripcion": "Buena calidad",
+        "precio": 60,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/85LytjNF/Audifonos-Alambricos.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"eSIM Telcel",
-        "descripcion":"LADA a elegir | Incluye de Saldo",
-        "precio":250,
-        "tipo":"sim",
-        "imagen":"https://i.postimg.cc/bw8V7D1F/Esim-Telcel-2.jpg",
-        "video":"https://youtube.com"
+        "nombre": "eSIM Telcel",
+        "descripcion": "LADA a elegir | Incluye de Saldo",
+        "precio": 250,
+        "tipo": "sim",
+        "imagen": "https://i.postimg.cc/bw8V7D1F/Esim-Telcel-2.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"eSIM Bait",
-        "descripcion":"LADA a elegir | Incluye 100 de saldo",
-        "precio":250,
-        "tipo":"sim",
-        "imagen":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHZ2w-QmsiQdMml1JkIAFBaikZkX4acxNRmw&s",
-        "video":"https://youtube.com"
+        "nombre": "eSIM Bait",
+        "descripcion": "LADA a elegir | Incluye 100 de saldo",
+        "precio": 250,
+        "tipo": "sim",
+        "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHZ2w-QmsiQdMml1JkIAFBaikZkX4acxNRmw&s",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"eSIM Movistar",
-        "descripcion":"LADA a elegir | Incluye 100 de Saldo",
-        "precio":299,
-        "tipo":"sim",
-        "imagen":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxKvaa974A_2ehqOEgHxswcbzGEU-3Y5_riA&s",
-        "video":"https://youtube.com"
+        "nombre": "eSIM Movistar",
+        "descripcion": "LADA a elegir | Incluye 100 de Saldo",
+        "precio": 299,
+        "tipo": "sim",
+        "imagen": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxKvaa974A_2ehqOEgHxswcbzGEU-3Y5_riA&s",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"eSIM AT&T",
-        "descripcion":"LADA a elegir | Incluye 100 de Saldo",
-        "precio":250,
-        "tipo":"sim",
-        "imagen":"https://i.postimg.cc/2S2GgHkc/Esim-att.png",
-        "video":"https://youtube.com"
+        "nombre": "eSIM AT&T",
+        "descripcion": "LADA a elegir | Incluye 100 de Saldo",
+        "precio": 250,
+        "tipo": "sim",
+        "imagen": "https://i.postimg.cc/2S2GgHkc/Esim-att.png",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Chip Telcel",
-        "descripcion":"LADA a elegir | Incluye 50 de Saldo",
-        "precio":100,
-        "tipo":"sim",
-        "imagen":"https://i.postimg.cc/C1XJKdXD/Chip-Telcel.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Chip Telcel",
+        "descripcion": "LADA a elegir | Incluye 50 de Saldo",
+        "precio": 100,
+        "tipo": "sim",
+        "imagen": "https://i.postimg.cc/C1XJKdXD/Chip-Telcel.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Chip AT&T",
-        "descripcion":"LADA a elegir | Incluye 50 de Saldo",
-        "precio":100,
-        "tipo":"sim",
-        "imagen":"https://i.postimg.cc/gkqyCMzH/chip-att.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Chip AT&T",
+        "descripcion": "LADA a elegir | Incluye 50 de Saldo",
+        "precio": 100,
+        "tipo": "sim",
+        "imagen": "https://i.postimg.cc/gkqyCMzH/chip-att.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Chip Unefon",
-        "descripcion":"LADA a elegir | Incluye 50 de Saldo",
-        "precio":100,
-        "tipo":"sim",
-        "imagen":"https://i.postimg.cc/8PHWKj4x/Chip-Unefon.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Chip Unefon",
+        "descripcion": "LADA a elegir | Incluye 50 de Saldo",
+        "precio": 100,
+        "tipo": "sim",
+        "imagen": "https://i.postimg.cc/8PHWKj4x/Chip-Unefon.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Chip Movistar",
-        "descripcion":"LADA 311 | Incluye 60 de Saldo",
-        "precio":100,
-        "tipo":"sim",
-        "imagen":"https://i.postimg.cc/zBrGYkXP/Chip-Movistar.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Chip Movistar",
+        "descripcion": "LADA 311 | Incluye 60 de Saldo",
+        "precio": 100,
+        "tipo": "sim",
+        "imagen": "https://i.postimg.cc/zBrGYkXP/Chip-Movistar.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Chip Bait",
-        "descripcion":"LADA al Azar | Incluye 100 de Saldo",
-        "precio":100,
-        "tipo":"sim",
-        "imagen":"https://i.postimg.cc/hG9Ks7bh/Chip-Bait.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Chip Bait",
+        "descripcion": "LADA al Azar | Incluye 100 de Saldo",
+        "precio": 100,
+        "tipo": "sim",
+        "imagen": "https://i.postimg.cc/hG9Ks7bh/Chip-Bait.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Instalación Paqueteria Office",
-        "descripcion":"Instalación Remota | Instalación Presencial en Establecimiento",
-        "precio":280,
-        "tipo":"servicio",
-        "imagen":"https://i.postimg.cc/GmWt3Rmw/Paqueteria-Office.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Instalación Paqueteria Office",
+        "descripcion": "Instalación Remota | Instalación Presencial en Establecimiento",
+        "precio": 280,
+        "tipo": "servicio",
+        "imagen": "https://i.postimg.cc/GmWt3Rmw/Paqueteria-Office.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Puntos de Venta",
-        "descripcion":"Abarrotes, Ferreterias, Fruterias, etc | Incluye Capacitación",
-        "precio":13000,
-        "tipo":"puntosVenta",
-        "imagen":"https://i.postimg.cc/hGKF1ZCs/Punto-de-venta.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Puntos de Venta",
+        "descripcion": "Abarrotes, Ferreterias, Fruterias, etc | Incluye Capacitación",
+        "precio": 13000,
+        "tipo": "puntosVenta",
+        "imagen": "https://i.postimg.cc/hGKF1ZCs/Punto-de-venta.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Terminal Cobro con Tarjeta",
-        "descripcion":"Creación de Cuenta | Incluye Capacitación",
-        "precio":799,
-        "tipo":"puntosVenta",
-        "imagen":"https://i.postimg.cc/yYcD3wqS/Terminal-Mercado-Pago.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Terminal Cobro con Tarjeta",
+        "descripcion": "Creación de Cuenta | Incluye Capacitación",
+        "precio": 799,
+        "tipo": "puntosVenta",
+        "imagen": "https://i.postimg.cc/yYcD3wqS/Terminal-Mercado-Pago.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Rollos de Papel Impresora Termica 58mm",
-        "descripcion":"Paquete de 10 Piezas | 58mm",
-        "precio":198,
-        "tipo":"impresoras",
-        "imagen":"https://i.postimg.cc/hvCpLf7P/Rollos-58mm.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Rollos de Papel Impresora Termica 58mm",
+        "descripcion": "Paquete de 10 Piezas | 58mm",
+        "precio": 198,
+        "tipo": "impresoras",
+        "imagen": "https://i.postimg.cc/hvCpLf7P/Rollos-58mm.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Laptop Dell Intel Core i5",
-        "descripcion":"Windows 11 | Pantalla Estrellada (No afecta) | 256gb SSD NVMe | 8gb RAM",
-        "precio":3499,
-        "tipo":"laptop",
-        "imagen":"https://i.postimg.cc/6QFpXsWM/Lpatops-Dell-i5.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Laptop Dell Intel Core i5",
+        "descripcion": "Windows 11 | Pantalla Estrellada (No afecta) | 256gb SSD NVMe | 8gb RAM",
+        "precio": 3499,
+        "tipo": "laptop",
+        "imagen": "https://i.postimg.cc/6QFpXsWM/Lpatops-Dell-i5.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Laptop Dell Intel Core i3",
-        "descripcion":"Windows 11 | Detalles Esteticos y Tecla Retroceso | 256gb SSD NVMe | 4gb RAM",
-        "precio":3999,
-        "tipo":"laptop",
-        "imagen":"https://i.postimg.cc/nrGFBCvs/Laptop-Dell-i3.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Laptop Dell Intel Core i3",
+        "descripcion": "Windows 11 | Detalles Esteticos y Tecla Retroceso | 256gb SSD NVMe | 4gb RAM",
+        "precio": 3999,
+        "tipo": "laptop",
+        "imagen": "https://i.postimg.cc/nrGFBCvs/Laptop-Dell-i3.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Laptop Huawei Matebook D15 AMD Rayzen 7",
-        "descripcion":"Windows 11  | 512gb SSD NVMe | 16gb RAM",
-        "precio":12999,
-        "tipo":"laptop",
-        "imagen":"https://i.postimg.cc/FFys2n2Z/Laptop-Huawei-D15.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Laptop Huawei Matebook D15 AMD Rayzen 7",
+        "descripcion": "Windows 11 | 512gb SSD NVMe | 16gb RAM",
+        "precio": 12999,
+        "tipo": "laptop",
+        "imagen": "https://i.postimg.cc/FFys2n2Z/Laptop-Huawei-D15.jpg",
+        "video": "https://youtube.com"
     },
     {
-        "nombre":"Muletas",
-        "descripcion":"Totalmente Ajustables | Para Pacientes que Miden desde 1.58m a 2.02m",
-        "precio":500,
-        "tipo":"ortopedia",
-        "imagen":"https://i.postimg.cc/sXQ8DPB4/Muletas.jpg",
-        "video":"https://youtube.com"
+        "nombre": "Muletas",
+        "descripcion": "Totalmente Ajustables | Para Pacientes que Miden desde 1.58m a 2.02m",
+        "precio": 500,
+        "tipo": "ortopedia",
+        "imagen": "https://i.postimg.cc/sXQ8DPB4/Muletas.jpg",
+        "video": "https://youtube.com"
     }
-] 
+]
