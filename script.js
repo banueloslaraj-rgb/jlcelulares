@@ -2,16 +2,38 @@ let carrito = []
 let costoEnvio = 150
 let productosGlobales = [] // Guardamos todos los productos aquí
 
+// ⚡ VERSIÓN ACTUAL - CÁMBIALA CADA VEZ QUE ACTUALICES PRODUCTOS
+const VERSION = '1.0.1'; // ⬅️ INCREMENTA ESTE NÚMERO (1.0.1, 1.0.2, 1.0.3, etc)
+
 async function cargarProductos(){
-    const res = await fetch("productos.json")
-    const productos = await res.json()
-    
-    productosGlobales = productos.map(p => ({
-        ...p,
-        precio: Number(p.precio)
-    }))
-    
-    mostrar(productosGlobales)
+    try {
+        console.log('🔄 Cargando productos - Versión:', VERSION);
+        
+        // Agregamos timestamp y versión para evitar caché
+        const timestamp = new Date().getTime();
+        const res = await fetch(`productos.json?v=${VERSION}&t=${timestamp}`);
+        
+        if (!res.ok) {
+            throw new Error(`Error HTTP: ${res.status}`);
+        }
+        
+        const productos = await res.json();
+        
+        productosGlobales = productos.map(p => ({
+            ...p,
+            precio: Number(p.precio)
+        }));
+        
+        mostrar(productosGlobales);
+        
+        // Mostrar en consola cuándo se cargaron
+        console.log(`✅ Productos cargados: ${productosGlobales.length} productos - ${new Date().toLocaleString()}`);
+        console.log('📦 Primer producto:', productosGlobales[0]?.nombre);
+        
+    } catch (error) {
+        console.error('❌ Error cargando productos:', error);
+        document.getElementById('productos').innerHTML = '<p style="text-align:center;color:red;">Error al cargar productos. Recarga la página.</p>';
+    }
 }
 
 function mostrar(lista){
@@ -26,9 +48,6 @@ function mostrar(lista){
     
     lista.forEach((producto) => {
         const precioFormateado = producto.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        
-        // Creamos un ID único temporal para el botón
-        const productoString = JSON.stringify(producto).replace(/"/g, '&quot;')
         
         contenedor.innerHTML += `
         <div class="card">
@@ -45,7 +64,6 @@ function mostrar(lista){
 }
 
 function agregarAlCarrito(producto) {
-    // Buscar si el producto ya está en el carrito (por nombre)
     const existe = carrito.find(item => item.nombre === producto.nombre)
     
     if(existe) {
@@ -345,4 +363,8 @@ window.onclick = function(event) {
     if (event.target == modalEnvio) modalEnvio.style.display = 'none'
 }
 
-cargarProductos()
+// Iniciar todo cuando carga la página
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Página cargada - Versión:', VERSION);
+    cargarProductos();
+});
