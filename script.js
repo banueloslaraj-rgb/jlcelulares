@@ -3,7 +3,7 @@ let costoEnvio = 150
 let productosGlobales = [] // Guardamos todos los productos aquí
 
 // ⚡ VERSIÓN ACTUAL - CÁMBIALA CADA VEZ QUE ACTUALICES PRODUCTOS
-const VERSION = '1.0.1'; // ⬅️ INCREMENTA ESTE NÚMERO (1.0.1, 1.0.2, 1.0.3, etc)
+const VERSION = '1.0.4'; // ⬅️ INCREMENTA ESTE NÚMERO (1.0.1, 1.0.2, 1.0.3, etc)
 
 async function cargarProductos(){
     try {
