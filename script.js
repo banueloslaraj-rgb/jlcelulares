@@ -1,17 +1,35 @@
 let carrito = []
 let costoEnvio = 150
-let productosGlobales = [] // Guardamos todos los productos aquí
+let productosGlobales = []
 
-// ⚡ VERSIÓN ACTUAL - CÁMBIALA CADA VEZ QUE ACTUALICES PRODUCTOS
-const VERSION = '1.0.4'; // ⬅️ INCREMENTA ESTE NÚMERO (1.0.1, 1.0.2, 1.0.3, etc)
+// ⚡ VERSIÓN ACTUAL
+const VERSION = '1.1.0'; // Cambiado a 1.1.0 por los íconos
+
+// 🎯 ÍCONOS POR CATEGORÍA
+const iconosCategoria = {
+    celular: '📱',
+    accesorio: '🔌',
+    sim: '📶',
+    servicio: '🛠️',
+    ortopedia: '🩼',
+    impresoras: '🖨️',
+    puntosVenta: '💳',
+    laptop: '💻',
+    default: '📦'
+};
+
+// Obtener ícono según el tipo
+function getIcono(tipo) {
+    return iconosCategoria[tipo] || iconosCategoria.default;
+}
 
 async function cargarProductos(){
     try {
         console.log('🔄 Cargando productos - Versión:', VERSION);
         
-        // Agregamos timestamp y versión para evitar caché
         const timestamp = new Date().getTime();
-        const res = await fetch(`productos.json?v=${VERSION}&t=${timestamp}`);
+        // ⚠️ IMPORTANTE: Cambiamos el nombre del archivo
+        const res = await fetch(`productos-data.json?v=${VERSION}&t=${timestamp}`);
         
         if (!res.ok) {
             throw new Error(`Error HTTP: ${res.status}`);
@@ -26,7 +44,6 @@ async function cargarProductos(){
         
         mostrar(productosGlobales);
         
-        // Mostrar en consola cuándo se cargaron
         console.log(`✅ Productos cargados: ${productosGlobales.length} productos - ${new Date().toLocaleString()}`);
         console.log('📦 Primer producto:', productosGlobales[0]?.nombre);
         
@@ -48,11 +65,12 @@ function mostrar(lista){
     
     lista.forEach((producto) => {
         const precioFormateado = producto.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        const icono = getIcono(producto.tipo); // 👈 Obtenemos el ícono
         
         contenedor.innerHTML += `
         <div class="card">
             <img src="${producto.imagen}" alt="${producto.nombre}" onerror="this.src='https://via.placeholder.com/300?text=Imagen+no+disponible'">
-            <h3>${producto.nombre}</h3>
+            <h3>${icono} ${producto.nombre}</h3> <!-- 👈 Ícono aquí -->
             <p>${producto.descripcion}</p>
             <p class="precio">$${precioFormateado}</p>
             <a href="${producto.video}" target="_blank">🎥 Ver video</a>
@@ -61,6 +79,12 @@ function mostrar(lista){
         </div>
         `
     })
+}
+
+// También podemos agregar íconos a los botones de filtro
+function actualizarBotonesConIconos() {
+    // Esto se puede hacer en el HTML directamente
+    console.log('Botones actualizados con íconos');
 }
 
 function agregarAlCarrito(producto) {
@@ -119,10 +143,11 @@ function actualizarVistaCarrito() {
     let html = '<div class="items-carrito">'
     
     carrito.forEach((item, index) => {
+        const icono = getIcono(item.tipo); // 👈 Ícono también en el carrito
         html += `
         <div class="item-carrito">
             <div class="item-info">
-                <div class="item-nombre">${item.nombre}</div>
+                <div class="item-nombre">${icono} ${item.nombre}</div>
                 <div class="item-precio">$${item.precio.toLocaleString()} c/u</div>
             </div>
             <div class="item-cantidad">
@@ -203,12 +228,15 @@ function mostrarFormularioEnvio() {
         
         <div class="resumen-compra">
             <h4>Resumen de compra</h4>
-            ${carrito.map(item => `
-            <div class="resumen-item">
-                <span>${item.nombre} x${item.cantidad}</span>
-                <span>$${(item.precio * item.cantidad).toLocaleString()}</span>
-            </div>
-            `).join('')}
+            ${carrito.map(item => {
+                const icono = getIcono(item.tipo);
+                return `
+                <div class="resumen-item">
+                    <span>${icono} ${item.nombre} x${item.cantidad}</span>
+                    <span>$${(item.precio * item.cantidad).toLocaleString()}</span>
+                </div>
+                `;
+            }).join('')}
             <div class="resumen-item">
                 <span>Envío</span>
                 <span>$${costoEnvio.toLocaleString()}</span>
@@ -249,7 +277,8 @@ function enviarPedidoWhatsApp() {
     mensaje += "*PRODUCTOS:*%0A"
     
     carrito.forEach(item => {
-        mensaje += `• ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}%0A`
+        const icono = getIcono(item.tipo);
+        mensaje += `• ${icono} ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toLocaleString()}%0A`
     })
     
     mensaje += `%0A*SUBTOTAL:* $${subtotal.toLocaleString()}`
@@ -363,7 +392,6 @@ window.onclick = function(event) {
     if (event.target == modalEnvio) modalEnvio.style.display = 'none'
 }
 
-// Iniciar todo cuando carga la página
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 Página cargada - Versión:', VERSION);
     cargarProductos();
