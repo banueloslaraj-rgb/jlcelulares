@@ -10,7 +10,7 @@
     {
         "nombre": "iPhone 11",
         "descripcion": "64GB | Batería 83% | Libre | Reacondicionado",
-        "precio": 3299,
+        "precio": 3199,
         "tipo": "celular",
         "imagen": "https://cdn.smart-gsm.com/img/picture/big/apple-iphone-11.jpg",
         "video": "https://youtube.com/shorts/w1KHfhfkdac?si=iiKdW_T9IcwKIqMx"
@@ -46,6 +46,22 @@
         "tipo": "celular",
         "imagen": "https://i.postimg.cc/QCVQcsGJ/i-Phone-15.jpg",
         "video": "https://youtube.com/shorts/pcKlNEVwRJc?si=hQnG4xMH9EmBkztr"
+    },
+    {
+        "nombre": "iPhone 15 Pro Max 0 Ciclos",
+        "descripcion": "256GB | Batería 100% | Libre | Bandeja Fisica",
+        "precio": 14999,
+        "tipo": "celular",
+        "imagen": "https://i.postimg.cc/v89z6VNs/15-Pro-max-azuljpg.jpg",
+        "video": "https://youtube.com/shorts/eXwesngnrA0?si=tlmauQVunCTf6cyd"
+    },
+    {
+        "nombre": "iPhone 15 Pro Max",
+        "descripcion": "256GB | Batería 87% | Libre | eSIM | Reacondicionado",
+        "precio": 11999,
+        "tipo": "celular",
+        "imagen": "https://i.postimg.cc/v89z6VNs/15-Pro-max-azuljpg.jpg",
+        "video": "https://youtube.com/shorts/6VT5zkQ6qro?si=gWZRcqJfr8NAIHMr"
     },
     {
         "nombre": "Samsung A06",
