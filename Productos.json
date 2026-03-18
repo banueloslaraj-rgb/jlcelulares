@@ -72,11 +72,11 @@
         "video": "https://youtube.com/shorts/Ozbv7YY3Img?si=HovJAIuqfKsx9NQR"
     },
     {
-        "nombre": "Audífonos Bluetooth",
-        "descripcion": "Alta calidad de sonido",
-        "precio": 350,
+        "nombre": "Cargador 1Hr 20w",
+        "descripcion": "Alta calidad de carga",
+        "precio": 220,
         "tipo": "accesorio",
-        "imagen": "https://via.placeholder.com/300",
+        "imagen": "https://i.postimg.cc/rFFxKTYb/Cragador-Completo-1hr.jpg",
         "video": "https://youtube.com"
     },
     {
@@ -248,6 +248,14 @@
         "video": "https://youtube.com"
     },
     {
+        "nombre": "Soporte Portacelular Motocicleta",
+        "descripcion": "Buena calidad | Moto | Bici",
+        "precio": 150,
+        "tipo": "accesorio",
+        "imagen": "https://i.postimg.cc/BnjFBg3C/Soporte-celular-moto.jpg",
+        "video": "https://youtube.com/shorts/nfBKj5VtRFE?si=4xKBnPwXBcHqhmym"
+    },
+    {
         "nombre": "eSIM Telcel",
         "descripcion": "LADA a elegir | Incluye de Saldo",
         "precio": 250,
@@ -373,6 +381,22 @@
         "precio": 12999,
         "tipo": "laptop",
         "imagen": "https://i.postimg.cc/FFys2n2Z/Laptop-Huawei-D15.jpg",
+        "video": "https://youtube.com"
+    },
+    {
+        "nombre": "Mouse Gamer",
+        "descripcion": "Alambrico | 1000 a 3000 dpi,
+        "precio": 320,
+        "tipo": "laptop",
+        "imagen": "https://i.postimg.cc/Kj76VByW/MOuse-Gmer.jpg",
+        "video": "https://youtube.com/shorts/bKzJwrave34?si=Q9fbdRk4gtYPOxrP"
+    },
+    {
+        "nombre": "Teclado Alambrico",
+        "descripcion": "Alambrico | Antiderrames,
+        "precio": 320,
+        "tipo": "laptop",
+        "imagen": "https://i.postimg.cc/QtQ1WdDx/Teclado-ANTIDERRAMES.jpg",
         "video": "https://youtube.com"
     },
     {
