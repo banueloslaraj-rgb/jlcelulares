@@ -385,7 +385,7 @@
     },
     {
         "nombre": "Mouse Gamer",
-        "descripcion": "Alambrico | 1000 a 3000 dpi,
+        "descripcion": "Alambrico | 1000 a 3000 dpi",
         "precio": 320,
         "tipo": "laptop",
         "imagen": "https://i.postimg.cc/Kj76VByW/MOuse-Gmer.jpg",
@@ -393,7 +393,7 @@
     },
     {
         "nombre": "Teclado Alambrico",
-        "descripcion": "Alambrico | Antiderrames,
+        "descripcion": "Alambrico | Antiderrames",
         "precio": 320,
         "tipo": "laptop",
         "imagen": "https://i.postimg.cc/QtQ1WdDx/Teclado-ANTIDERRAMES.jpg",
