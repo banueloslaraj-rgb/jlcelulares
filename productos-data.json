@@ -16,14 +16,6 @@
         "video": "https://youtube.com/shorts/w1KHfhfkdac?si=iiKdW_T9IcwKIqMx"
     },
     {
-        "nombre": "iPhone 12",
-        "descripcion": "128GB | Batería 79% | Libre | Reacondicionado",
-        "precio": 3499,
-        "tipo": "celular",
-        "imagen": "https://i.postimg.cc/664yV17d/i-Phone-12.jpg",
-        "video": "https://youtube.com/shorts/33cgp2l9dWY?si=XQxJdm4pSCPTg3c2"
-    }, 
-    {
         "nombre": "iPhone 12 pro",
         "descripcion": "128GB | Batería 100% | Libre | Reacondicionado",
         "precio": 4599,
