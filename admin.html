@@ -215,14 +215,117 @@
         `).join('')
     }
     
+    // ========== CAMBIAR ESTADO CON MENSAJES AMIGABLES ==========
     async function cambiarEstado(numeroPedido, nuevoEstado) {
+        const pedido = pedidos.find(p => p.numero_pedido === numeroPedido)
+        if (!pedido) {
+            mostrarToast('❌ No se encontró el pedido', 'error')
+            return
+        }
+        
+        // ========== MENSAJES AMIGABLES SEGÚN EL ESTADO ==========
+        let mensajeWhatsApp = ''
+        let tituloConfirmacion = ''
+        
+        switch(nuevoEstado) {
+            case 'procesando':
+                tituloConfirmacion = '⚙️ PEDIDO EN PROCESO'
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
+                mensajeWhatsApp += `✅ Tu pedido *${pedido.numero_pedido}* está siendo preparado. %0A`
+                mensajeWhatsApp += `En breve te avisamos cuando esté listo para envío. %0A%0A`
+                mensajeWhatsApp += `¡Gracias por tu paciencia! 🙌%0A`
+                mensajeWhatsApp += `📍 JL Celulares`
+                break
+                
+            case 'enviado':
+                tituloConfirmacion = '🚚 PEDIDO ENVIADO'
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
+                mensajeWhatsApp += `🎉 ¡Tu pedido *${pedido.numero_pedido}* ya está en camino! 🚚%0A`
+                mensajeWhatsApp += `Pronto recibirás tu pedido. %0A%0A`
+                mensajeWhatsApp += `Gracias por confiar en JL Celulares 💙%0A`
+                mensajeWhatsApp += `📍 ¡Siempre contigo!`
+                break
+                
+            case 'entregado':
+                tituloConfirmacion = '✅ PEDIDO ENTREGADO'
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
+                mensajeWhatsApp += `🎉 ¡Tu pedido *${pedido.numero_pedido}* ha sido entregado con éxito! %0A%0A`
+                mensajeWhatsApp += `Gracias por tu compra. ¡Te esperamos pronto! 💙%0A`
+                mensajeWhatsApp += `📍 JL Celulares`
+                break
+                
+            case 'cancelado':
+                tituloConfirmacion = '❌ PEDIDO CANCELADO'
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
+                mensajeWhatsApp += `Lamentamos informarte que tu pedido *${pedido.numero_pedido}* ha sido cancelado. %0A%0A`
+                mensajeWhatsApp += `Si tienes dudas, contáctanos al 3111063251. %0A%0A`
+                mensajeWhatsApp += `📍 JL Celulares`
+                break
+                
+            case 'pendiente':
+                tituloConfirmacion = '📋 PEDIDO RECIBIDO'
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
+                mensajeWhatsApp += `✅ Hemos recibido tu pedido *${pedido.numero_pedido}* correctamente. %0A`
+                mensajeWhatsApp += `En breve comenzaremos con su preparación. %0A%0A`
+                mensajeWhatsApp += `¡Gracias por preferirnos! 🙌%0A`
+                mensajeWhatsApp += `📍 JL Celulares`
+                break
+                
+            default:
+                tituloConfirmacion = '📌 ESTADO ACTUALIZADO'
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
+                mensajeWhatsApp += `Tu pedido *${pedido.numero_pedido}* ahora está en estado: *${nuevoEstado}* %0A%0A`
+                mensajeWhatsApp += `Para más información, contáctanos al 3111063251. %0A%0A`
+                mensajeWhatsApp += `📍 JL Celulares`
+                break
+        }
+        
+        // Mostrar confirmación antes de enviar
+        const confirmar = confirm(`📱 ¿Enviar WhatsApp al cliente?\n\n${tituloConfirmacion}\n\nCliente: ${pedido.cliente_nombre}\nTeléfono: ${pedido.cliente_telefono}\n\nMensaje:\n${mensajeWhatsApp.replace(/%0A/g, '\n')}`)
+        
+        if (!confirmar) {
+            // Si no quiere enviar WhatsApp, solo actualiza el estado
+            const { error } = await supabaseClient
+                .from('pedidos_jl')
+                .update({ estado: nuevoEstado, fecha_actualizacion: new Date().toISOString() })
+                .eq('numero_pedido', numeroPedido)
+            
+            if (error) {
+                mostrarToast('❌ Error: ' + error.message, 'error')
+            } else {
+                mostrarToast('✅ Estado actualizado (sin WhatsApp)', 'success')
+                cargarPedidos()
+            }
+            return
+        }
+        
+        // ========== ENVIAR WHATSAPP CON MENSAJE AMIGABLE ==========
+        const numeroCliente = pedido.cliente_telefono.replace(/\D/g, '')
+        const numeroWhatsapp = `52${numeroCliente}` // Código país México
+        
+        // Detectar si es móvil o PC
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+        
+        if (isMobile) {
+            window.location.href = `whatsapp://send?phone=${numeroWhatsapp}&text=${mensajeWhatsApp}`
+            setTimeout(() => {
+                if (!document.hidden) {
+                    mostrarToast('⚠️ Si no abre, verifica que tengas WhatsApp instalado', 'error')
+                }
+            }, 2000)
+        } else {
+            window.open(`https://wa.me/${numeroWhatsapp}?text=${mensajeWhatsApp}`, '_blank')
+            mostrarToast('📱 Abriendo WhatsApp Web...', 'success')
+        }
+        
+        // ========== ACTUALIZAR ESTADO EN SUPABASE ==========
         const { error } = await supabaseClient
             .from('pedidos_jl')
             .update({ estado: nuevoEstado, fecha_actualizacion: new Date().toISOString() })
             .eq('numero_pedido', numeroPedido)
         
         if (error) {
-            mostrarToast('❌ Error: ' + error.message, 'error')
+            mostrarToast('❌ Error al actualizar estado: ' + error.message, 'error')
         } else {
             mostrarToast(`✅ Estado actualizado a: ${nuevoEstado}`, 'success')
             cargarPedidos()
@@ -285,7 +388,13 @@
         mensaje += `📌 *Estado:* ${pedido.estado}`
         
         const numeroCliente = pedido.cliente_telefono.replace(/\D/g, '')
-        window.open(`https://wa.me/52${numeroCliente}?text=${mensaje}`, '_blank')
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+        
+        if (isMobile) {
+            window.location.href = `whatsapp://send?phone=52${numeroCliente}&text=${mensaje}`
+        } else {
+            window.open(`https://wa.me/52${numeroCliente}?text=${mensaje}`, '_blank')
+        }
         mostrarToast('📱 Abriendo WhatsApp...', 'success')
     }
     
