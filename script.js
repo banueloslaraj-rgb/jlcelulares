@@ -1,5 +1,4 @@
 // ========== CONFIGURACIÓN DE SUPABASE ==========
-// ⚠️ REEMPLAZA CON LOS DATOS DE TU NUEVO PROYECTO SUPABASE ⚠️
 const SUPABASE_URL = 'https://ybmkdrbpebckwgncjted.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlibWtkcmJwZWJja3dnbmNqdGVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzODI1MDMsImV4cCI6MjA4OTk1ODUwM30.FyT4ouoVaSL9eJgSuEWqzVRrFjNFMH-liISab6Ed6Nw'
 
@@ -11,7 +10,7 @@ let costoEnvio = 150
 let productosGlobales = []
 
 // ⚡ VERSIÓN ACTUAL
-const VERSION = '3.0.0'
+const VERSION = '2.0.0'
 
 // 🎯 ÍCONOS POR CATEGORÍA
 const iconosCategoria = {
@@ -345,7 +344,7 @@ async function enviarPedidoWhatsApp() {
     }
     
     // ========== PREPARAR MENSAJE DE WHATSAPP ==========
-    const numeroWhatsappNegocio = '523111063251'  // Número de JL Celulares
+    const numeroWhatsappNegocio = '523111063251'
     
     let mensaje = "🛒 *NUEVO PEDIDO - JL CELULARES*%0A"
     mensaje += `📋 *NÚMERO DE PEDIDO:* ${numeroPedido}%0A%0A`
@@ -369,10 +368,8 @@ async function enviarPedidoWhatsApp() {
     mensaje += "¡Gracias por tu compra! 🙌%0A"
     mensaje += "📍 JL Celulares - ¡Siempre contigo! 📱"
     
-    // Abrir WhatsApp
     abrirWhatsApp(numeroWhatsappNegocio, mensaje)
     
-    // Limpiar carrito y cerrar modal
     setTimeout(() => {
         cerrarModalEnvio()
         carrito = []
@@ -380,7 +377,6 @@ async function enviarPedidoWhatsApp() {
     }, 1500)
 }
 
-// Guardar pedidos localmente como respaldo
 function guardarPedidoLocal(pedido) {
     const pedidosGuardados = localStorage.getItem('pedidos_backup_jl')
     let pedidos = pedidosGuardados ? JSON.parse(pedidosGuardados) : []
