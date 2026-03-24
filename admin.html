@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Panel Admin - JL Celulares</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);
+            min-height: 100vh;
+        }
+        
+        /* Pantalla de Login */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .login-box {
+            max-width: 400px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        .login-box h2 {
+            color: #0d6efd;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .login-box p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .login-box input {
+            width: 100%;
+            padding: 14px;
+            margin: 10px 0;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        
+        .login-box input:focus {
+            outline: none;
+            border-color: #0d6efd;
+        }
+        
+        .login-box button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+        
+        .login-box button:hover {
+            background: #0b5ed7;
+        }
+        
+        .error-message {
+            color: #dc3545;
+            margin-top: 15px;
+            padding: 10px;
+            background: #ffe6e6;
+            border-radius: 8px;
+        }
+        
+        .success-message {
+            color: #28a745;
+            margin-top: 15px;
+            padding: 10px;
+            background: #e6ffe6;
+            border-radius: 8px;
+        }
+        
+        .volver-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0d6efd;
+            text-decoration: none;
+        }
+        
+        .dashboard {
+            display: none;
+        }
+        
+        .admin-header {
+            background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .admin-header h1 {
+            font-size: 24px;
+        }
+        
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 20px;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            padding: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card h4 {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+        
+        .stat-card h3 {
+            font-size: 36px;
+            color: #0d6efd;
+        }
+        
+        .filtros {
+            background: white;
+            margin: 20px 25px;
+            padding: 20px;
+            border-radius: 15px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filtros input, .filtros select {
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 180px;
+        }
+        
+        .filtros button {
+            padding: 12px 25px;
+            background: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .pedidos-table {
+            background: white;
+            margin: 20px 25px;
+            border-radius: 15px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: #0d6efd;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            cursor: pointer;
+        }
+        
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        tr:hover {
+            background: #f0f8ff;
+        }
+        
+        .estado-select {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .estado-pendiente { background: #ffc107; }
+        .estado-procesando { background: #17a2b8; color: white; }
+        .estado-enviado { background: #007bff; color: white; }
+        .estado-entregado { background: #28a745; color: white; }
+        .estado-cancelado { background: #dc3545; color: white; }
+        
+        .btn-ver {
+            background: #0d6efd;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+        
+        .btn-wa {
+            background: #25D366;
+            color: white;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 50px auto;
+            padding: 25px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+        
+        .modal-content h2 {
+            color: #0d6efd;
+            margin-bottom: 20px;
+        }
+        
+        .cerrar-modal {
+            margin-top: 20px;
+            padding: 10px;
+            background: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #28a745;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            z-index: 3000;
+            animation: fadeOut 3s ease forwards;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        .toast-error {
+            background: #dc3545;
+        }
+        
+        @keyframes fadeOut {
+            0% { opacity: 1; visibility: visible; }
+            70% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+        
+        @media (max-width: 768px) {
+            .admin-header h1 { font-size: 18px; }
+            th, td { font-size: 12px; padding: 8px; }
+            .stats { grid-template-columns: 1fr 1fr; }
+            .toast { bottom: 20px; right: 20px; padding: 8px 16px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Login -->
+<div id="loginPanel" class="login-container">
+    <div class="login-box">
+        <h2>🔐 Panel Administrador</h2>
+        <p>Ingresa la contraseña para acceder</p>
+        <input type="password" id="passwordInput" placeholder="Contraseña" onkeypress="if(event.key==='Enter') verificarPassword()">
+        <button onclick="verificarPassword()">Acceder al panel</button>
+        <div id="mensajeLogin"></div>
+        <a href="index.html" class="volver-link">← Volver a la tienda</a>
+    </div>
+</div>
+
+<!-- Dashboard Admin -->
+<div id="adminPanel" class="dashboard">
+    <div class="admin-header">
+        <h1>📊 JL Celulares - Panel de Administración</h1>
+        <button class="logout-btn" onclick="cerrarSesion()">🚪 Cerrar Sesión</button>
+    </div>
+    
+    <div class="stats" id="stats">
+        <div class="stat-card">
+            <h4>📊 Total Pedidos</h4>
+            <h3 id="totalPedidos">0</h3>
+        </div>
+        <div class="stat-card">
+            <h4>💰 Total Ventas</h4>
+            <h3 id="totalVentas">$0</h3>
+        </div>
+        <div class="stat-card">
+            <h4>⏳ Pendientes</h4>
+            <h3 id="pendientes">0</h3>
+        </div>
+        <div class="stat-card">
+            <h4>📅 Pedidos Hoy</h4>
+            <h3 id="pedidosHoy">0</h3>
+        </div>
+    </div>
+    
+    <div class="filtros">
+        <input type="text" id="searchInput" placeholder="🔍 Buscar por nombre o teléfono..." onkeyup="filtrarPedidos()">
+        <select id="estadoFilter" onchange="filtrarPedidos()">
+            <option value="">📌 Todos los estados</option>
+            <option value="pendiente">⏳ Pendiente</option>
+            <option value="procesando">⚙️ Procesando</option>
+            <option value="enviado">🚚 Enviado</option>
+            <option value="entregado">✅ Entregado</option>
+            <option value="cancelado">❌ Cancelado</option>
+        </select>
+        <input type="date" id="fechaFilter" onchange="filtrarPedidos()">
+        <button onclick="cargarPedidos()">🔄 Actualizar</button>
+    </div>
+    
+    <div class="pedidos-table">
+        <table id="tablaPedidos">
+            <thead>
+                <tr>
+                    <th onclick="ordenarPor('numero_pedido')">📋 Pedido</th>
+                    <th onclick="ordenarPor('fecha')">📅 Fecha</th>
+                    <th onclick="ordenarPor('cliente_nombre')">👤 Cliente</th>
+                    <th onclick="ordenarPor('cliente_telefono')">📞 Teléfono</th>
+                    <th onclick="ordenarPor('total')">💰 Total</th>
+                    <th onclick="ordenarPor('estado')">📌 Estado</th>
+                    <th>🔧 Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="pedidosBody">
+                <tr><td colspan="7" class="loading">🔐 Inicia sesión para ver los pedidos</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal Detalle -->
+<div id="detalleModal" class="modal">
+    <div class="modal-content">
+        <h2>📦 Detalle del Pedido</h2>
+        <div id="detalleContenido"></div>
+        <button class="cerrar-modal" onclick="cerrarModal()">Cerrar</button>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    // ========== CONFIGURACIÓN DE SUPABASE ==========
+    // ⚠️ REEMPLAZA CON LOS DATOS DE TU NUEVO PROYECTO SUPABASE ⚠️
+    const SUPABASE_URL = 'https://TU-PROYECTO.supabase.co'
+    const SUPABASE_ANON_KEY = 'TU-ANON-KEY-AQUI'
+    
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    
+    let pedidos = []
+    let ordenActual = { columna: 'fecha', direccion: 'desc' }
+    let pedidosFiltrados = []
+    
+    // ========== LOGIN ==========
+    function verificarPassword() {
+        const password = document.getElementById('passwordInput').value
+        const mensajeDiv = document.getElementById('mensajeLogin')
+        
+        if (password === 'admin123') {
+            mensajeDiv.innerHTML = '<div class="success-message">✅ Acceso correcto</div>'
+            setTimeout(() => {
+                document.getElementById('loginPanel').style.display = 'none'
+                document.getElementById('adminPanel').style.display = 'block'
+                cargarPedidos()
+            }, 500)
+        } else {
+            mensajeDiv.innerHTML = '<div class="error-message">❌ Contraseña incorrecta</div>'
+            document.getElementById('passwordInput').value = ''
+        }
+    }
+    
+    function cerrarSesion() {
+        document.getElementById('loginPanel').style.display = 'flex'
+        document.getElementById('adminPanel').style.display = 'none'
+        document.getElementById('passwordInput').value = ''
+        document.getElementById('mensajeLogin').innerHTML = ''
+    }
+    
+    // ========== CARGAR PEDIDOS ==========
+    async function cargarPedidos() {
+        const tbody = document.getElementById('pedidosBody')
+        tbody.innerHTML = '<tr><td colspan="7" class="loading">🔄 Cargando pedidos...</td></tr>'
+        
+        const { data, error } = await supabaseClient
+            .from('pedidos_jl')
+            .select('*')
+            .order(ordenActual.columna, { ascending: ordenActual.direccion === 'asc' })
+        
+        if (error) {
+            console.error('Error:', error)
+            tbody.innerHTML = `<tr><td colspan="7" class="loading" style="color:red;">❌ Error: ${error.message}</td></tr>`
+            return
+        }
+        
+        pedidos = data || []
+        pedidosFiltrados = [...pedidos]
+        mostrarPedidos(pedidosFiltrados)
+        actualizarEstadisticas(pedidos)
+    }
+    
+    function mostrarPedidos(pedidosMostrar) {
+        const tbody = document.getElementById('pedidosBody')
+        
+        if (!pedidosMostrar || pedidosMostrar.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" class="loading">📭 No hay pedidos registrados</td></tr>'
+            return
+        }
+        
+        tbody.innerHTML = pedidosMostrar.map(pedido => `
+            <tr>
+                <td style="font-weight: bold;">${pedido.numero_pedido || 'N/A'}</td>
+                <td>${pedido.fecha ? new Date(pedido.fecha).toLocaleDateString('es-MX') : 'N/A'}</td>
+                <td>${pedido.cliente_nombre || 'N/A'}</td>
+                <td>${pedido.cliente_telefono || 'N/A'}</td>
+                <td>$${(pedido.total || 0).toLocaleString()}</td>
+                <td>
+                    <select class="estado-select estado-${pedido.estado || 'pendiente'}" 
+                            onchange="cambiarEstado('${pedido.numero_pedido}', this.value)">
+                        <option value="pendiente" ${pedido.estado === 'pendiente' ? 'selected' : ''}>⏳ Pendiente</option>
+                        <option value="procesando" ${pedido.estado === 'procesando' ? 'selected' : ''}>⚙️ Procesando</option>
+                        <option value="enviado" ${pedido.estado === 'enviado' ? 'selected' : ''}>🚚 Enviado</option>
+                        <option value="entregado" ${pedido.estado === 'entregado' ? 'selected' : ''}>✅ Entregado</option>
+                        <option value="cancelado" ${pedido.estado === 'cancelado' ? 'selected' : ''}>❌ Cancelado</option>
+                    </select>
+                </td>
+                <td>
+                    <button class="btn-ver" onclick="verDetalle('${pedido.numero_pedido}')">📋 Ver</button>
+                    <button class="btn-wa" onclick="copiarWhatsApp('${pedido.numero_pedido}')">💬 WA</button>
+                </td>
+            </tr>
+        `).join('')
+    }
+    
+    // ========== CAMBIAR ESTADO CON MENSAJES AMIGABLES ==========
+    async function cambiarEstado(numeroPedido, nuevoEstado) {
+        const pedido = pedidos.find(p => p.numero_pedido === numeroPedido)
+        if (!pedido) {
+            mostrarToast('❌ No se encontró el pedido', 'error')
+            return
+        }
+        
+        let mensajeWhatsApp = ''
+        let tituloConfirmacion = ''
+        
+        switch(nuevoEstado) {
+            case 'procesando':
+                tituloConfirmacion = '⚙️ PEDIDO EN PROCESO'
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
+                mensajeWhatsApp += `✅ Tu pedido *${pedido.numero_pedido}* está siendo preparado. %0A`
+                mensajeWhatsApp += `En breve te avisamos cuando esté listo para envío. %0A%0A`
+                mensajeWhatsApp += `¡Gracias por tu paciencia! 🙌%0A`
+                mensajeWhatsApp += `📍 JL Celulares`
+                break
+                
+            case 'enviado':
+                tituloConfirmacion = '🚚 PEDIDO ENVIADO'
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
+                mensajeWhatsApp += `🎉 ¡Tu pedido *${pedido.numero_pedido}* ya está en camino! 🚚%0A`
+                mensajeWhatsApp += `Pronto recibirás tu pedido. %0A%0A`
+                mensajeWhatsApp += `Gracias por confiar en JL Celulares 💙%0A`
+                mensajeWhatsApp += `📍 ¡Siempre contigo!`
+                break
+                
+            case 'entregado':
+                tituloConfirmacion = '✅ PEDIDO ENTREGADO'
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
+                mensajeWhatsApp += `🎉 ¡Tu pedido *${pedido.numero_pedido}* ha sido entregado con éxito! %0A%0A`
+                mensajeWhatsApp += `Gracias por tu compra. ¡Te esperamos pronto! 💙%0A`
+                mensajeWhatsApp += `📍 JL Celulares`
+                break
+                
+            case 'cancelado':
+                tituloConfirmacion = '❌ PEDIDO CANCELADO'
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
+                mensajeWhatsApp += `Lamentamos informarte que tu pedido *${pedido.numero_pedido}* ha sido cancelado. %0A%0A`
+                mensajeWhatsApp += `Si tienes dudas, contáctanos al 3111063251. %0A%0A`
+                mensajeWhatsApp += `📍 JL Celulares`
+                break
+                
+            case 'pendiente':
+                tituloConfirmacion = '📋 PEDIDO RECIBIDO'
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
+                mensajeWhatsApp += `✅ Hemos recibido tu pedido *${pedido.numero_pedido}* correctamente. %0A`
+                mensajeWhatsApp += `En breve comenzaremos con su preparación. %0A%0A`
+                mensajeWhatsApp += `¡Gracias por preferirnos! 🙌%0A`
+                mensajeWhatsApp += `📍 JL Celulares`
+                break
+                
+            default:
+                tituloConfirmacion = '📌 ESTADO ACTUALIZADO'
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
+                mensajeWhatsApp += `Tu pedido *${pedido.numero_pedido}* ahora está en estado: *${nuevoEstado}* %0A%0A`
+                mensajeWhatsApp += `Para más información, contáctanos al 3111063251. %0A%0A`
+                mensajeWhatsApp += `📍 JL Celulares`
+                break
+        }
+        
+        const confirmar = confirm(`📱 ¿Enviar WhatsApp al cliente?\n\n${tituloConfirmacion}\n\nCliente: ${pedido.cliente_nombre}\nTeléfono: ${pedido.cliente_telefono}\n\nMensaje:\n${mensajeWhatsApp.replace(/%0A/g, '\n')}`)
+        
+        if (!confirmar) {
+            const { error } = await supabaseClient
+                .from('pedidos_jl')
+                .update({ estado: nuevoEstado, fecha_actualizacion: new Date().toISOString() })
+                .eq('numero_pedido', numeroPedido)
+            
+            if (error) {
+                mostrarToast('❌ Error: ' + error.message, 'error')
+            } else {
+                mostrarToast('✅ Estado actualizado (sin WhatsApp)', 'success')
+                cargarPedidos()
+            }
+            return
+        }
+        
+        const numeroCliente = pedido.cliente_telefono.replace(/\D/g, '')
+        const numeroWhatsapp = `52${numeroCliente}`
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+        
+        if (isMobile) {
+            window.location.href = `whatsapp://send?phone=${numeroWhatsapp}&text=${mensajeWhatsApp}`
+            setTimeout(() => {
+                if (!document.hidden) {
+                    mostrarToast('⚠️ Si no abre, verifica que tengas WhatsApp instalado', 'error')
+                }
+            }, 2000)
+        } else {
+            window.open(`https://wa.me/${numeroWhatsapp}?text=${mensajeWhatsApp}`, '_blank')
+            mostrarToast('📱 Abriendo WhatsApp Web...', 'success')
+        }
+        
+        const { error } = await supabaseClient
+            .from('pedidos_jl')
+            .update({ estado: nuevoEstado, fecha_actualizacion: new Date().toISOString() })
+            .eq('numero_pedido', numeroPedido)
+        
+        if (error) {
+            mostrarToast('❌ Error al actualizar estado: ' + error.message, 'error')
+        } else {
+            mostrarToast(`✅ Estado actualizado a: ${nuevoEstado}`, 'success')
+            cargarPedidos()
+        }
+    }
+    
+    function verDetalle(numeroPedido) {
+        const pedido = pedidos.find(p => p.numero_pedido === numeroPedido)
+        if (!pedido) return
+        
+        const modal = document.getElementById('detalleModal')
+        const contenido = document.getElementById('detalleContenido')
+        
+        let productosHtml = '<h3>📦 Productos:</h3><ul>'
+        if (pedido.productos && pedido.productos.length > 0) {
+            pedido.productos.forEach(p => {
+                productosHtml += `<li>${p.nombre} x${p.cantidad} - $${(p.subtotal || 0).toLocaleString()}</li>`
+            })
+        } else {
+            productosHtml += '<li>No hay productos registrados</li>'
+        }
+        productosHtml += '</ul>'
+        
+        contenido.innerHTML = `
+            <p><strong>📋 Pedido:</strong> ${pedido.numero_pedido}</p>
+            <p><strong>📅 Fecha:</strong> ${pedido.fecha ? new Date(pedido.fecha).toLocaleString('es-MX') : 'N/A'}</p>
+            <hr>
+            <p><strong>👤 Cliente:</strong> ${pedido.cliente_nombre}</p>
+            <p><strong>📞 Teléfono:</strong> ${pedido.cliente_telefono}</p>
+            <p><strong>📍 Dirección:</strong> ${pedido.cliente_direccion}</p>
+            <p><strong>🏙️ Ciudad:</strong> ${pedido.cliente_ciudad}, ${pedido.cliente_estado} CP ${pedido.cliente_cp}</p>
+            <hr>
+            ${productosHtml}
+            <hr>
+            <p><strong>💰 Subtotal:</strong> $${(pedido.subtotal || 0).toLocaleString()}</p>
+            <p><strong>🚚 Envío:</strong> $${(pedido.costo_envio || 0).toLocaleString()}</p>
+            <p><strong>💵 Total:</strong> $${(pedido.total || 0).toLocaleString()}</p>
+            <p><strong>📌 Estado:</strong> ${pedido.estado}</p>
+        `
+        modal.style.display = 'block'
+    }
+    
+    function copiarWhatsApp(numeroPedido) {
+        const pedido = pedidos.find(p => p.numero_pedido === numeroPedido)
+        if (!pedido) return
+        
+        let mensaje = `*PEDIDO ${pedido.numero_pedido} - JL CELULARES*%0A%0A`
+        mensaje += `👤 *Cliente:* ${pedido.cliente_nombre}%0A`
+        mensaje += `📞 *Teléfono:* ${pedido.cliente_telefono}%0A`
+        mensaje += `📍 *Dirección:* ${pedido.cliente_direccion}%0A%0A`
+        mensaje += `*Productos:*%0A`
+        
+        if (pedido.productos && pedido.productos.length > 0) {
+            pedido.productos.forEach(p => {
+                mensaje += `• ${p.nombre} x${p.cantidad} - $${(p.subtotal || 0).toLocaleString()}%0A`
+            })
+        }
+        
+        mensaje += `%0A💰 *Total:* $${(pedido.total || 0).toLocaleString()}%0A`
+        mensaje += `📌 *Estado:* ${pedido.estado}`
+        
+        const numeroCliente = pedido.cliente_telefono.replace(/\D/g, '')
+        const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+        
+        if (isMobile) {
+            window.location.href = `whatsapp://send?phone=52${numeroCliente}&text=${mensaje}`
+        } else {
+            window.open(`https://wa.me/52${numeroCliente}?text=${mensaje}`, '_blank')
+        }
+        mostrarToast('📱 Abriendo WhatsApp...', 'success')
+    }
+    
+    function actualizarEstadisticas(pedidosLista) {
+        const totalPedidos = pedidosLista.length
+        const totalVentas = pedidosLista.reduce((sum, p) => sum + (p.total || 0), 0)
+        const pendientes = pedidosLista.filter(p => p.estado === 'pendiente').length
+        const hoy = pedidosLista.filter(p => {
+            if (!p.fecha) return false
+            return new Date(p.fecha).toDateString() === new Date().toDateString()
+        }).length
+        
+        document.getElementById('totalPedidos').textContent = totalPedidos
+        document.getElementById('totalVentas').textContent = '$' + totalVentas.toLocaleString()
+        document.getElementById('pendientes').textContent = pendientes
+        document.getElementById('pedidosHoy').textContent = hoy
+    }
+    
+    function filtrarPedidos() {
+        const search = document.getElementById('searchInput').value.toLowerCase()
+        const estado = document.getElementById('estadoFilter').value
+        const fecha = document.getElementById('fechaFilter').value
+        
+        let filtrados = [...pedidos]
+        
+        if (search) {
+            filtrados = filtrados.filter(p => 
+                (p.cliente_nombre && p.cliente_nombre.toLowerCase().includes(search)) ||
+                (p.cliente_telefono && p.cliente_telefono.includes(search)) ||
+                (p.numero_pedido && p.numero_pedido.toLowerCase().includes(search))
+            )
+        }
+        
+        if (estado) {
+            filtrados = filtrados.filter(p => p.estado === estado)
+        }
+        
+        if (fecha) {
+            filtrados = filtrados.filter(p => {
+                if (!p.fecha) return false
+                return new Date(p.fecha).toISOString().split('T')[0] === fecha
+            })
+        }
+        
+        mostrarPedidos(filtrados)
+    }
+    
+    function ordenarPor(columna) {
+        if (ordenActual.columna === columna) {
+            ordenActual.direccion = ordenActual.direccion === 'asc' ? 'desc' : 'asc'
+        } else {
+            ordenActual.columna = columna
+            ordenActual.direccion = 'asc'
+        }
+        cargarPedidos()
+    }
+    
+    function cerrarModal() {
+        document.getElementById('detalleModal').style.display = 'none'
+    }
+    
+    function mostrarToast(mensaje, tipo = 'success') {
+        const toast = document.createElement('div')
+        toast.className = 'toast'
+        if (tipo === 'error') toast.classList.add('toast-error')
+        toast.textContent = mensaje
+        document.body.appendChild(toast)
+        setTimeout(() => toast.remove(), 3000)
+    }
+    
+    window.onclick = function(event) {
+        const modal = document.getElementById('detalleModal')
+        if (event.target === modal) {
+            modal.style.display = 'none'
+        }
+    }
+    
+    window.onload = function() {
+        console.log('JL Celulares - Admin panel cargado')
+    }
+</script>
+</body>
+</html>

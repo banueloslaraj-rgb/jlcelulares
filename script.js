@@ -1,9 +1,17 @@
+// ========== CONFIGURACIÓN DE SUPABASE ==========
+// ⚠️ REEMPLAZA CON LOS DATOS DE TU NUEVO PROYECTO SUPABASE ⚠️
+const SUPABASE_URL = 'https://ybmkdrbpebckwgncjted.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlibWtkcmJwZWJja3dnbmNqdGVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzODI1MDMsImV4cCI6MjA4OTk1ODUwM30.FyT4ouoVaSL9eJgSuEWqzVRrFjNFMH-liISab6Ed6Nw'
+
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+// ========== VARIABLES GLOBALES ==========
 let carrito = []
 let costoEnvio = 150
 let productosGlobales = []
 
 // ⚡ VERSIÓN ACTUAL
-const VERSION = '1.1.1'; // Cambiado a 1.1.1 por los íconos
+const VERSION = '2.0.0'
 
 // 🎯 ÍCONOS POR CATEGORÍA
 const iconosCategoria = {
@@ -18,17 +26,16 @@ const iconosCategoria = {
     default: '📦'
 };
 
-// Obtener ícono según el tipo
 function getIcono(tipo) {
     return iconosCategoria[tipo] || iconosCategoria.default;
 }
 
+// ========== CARGAR PRODUCTOS ==========
 async function cargarProductos(){
     try {
-        console.log('🔄 Cargando productos - Versión:', VERSION);
+        console.log('🔄 Cargando productos - JL Celulares Versión:', VERSION);
         
         const timestamp = new Date().getTime();
-        // ⚠️ IMPORTANTE: Cambiamos el nombre del archivo
         const res = await fetch(`productos-data.json?v=${VERSION}&t=${timestamp}`);
         
         if (!res.ok) {
@@ -44,8 +51,7 @@ async function cargarProductos(){
         
         mostrar(productosGlobales);
         
-        console.log(`✅ Productos cargados: ${productosGlobales.length} productos - ${new Date().toLocaleString()}`);
-        console.log('📦 Primer producto:', productosGlobales[0]?.nombre);
+        console.log(`✅ Productos cargados: ${productosGlobales.length} productos`);
         
     } catch (error) {
         console.error('❌ Error cargando productos:', error);
@@ -65,26 +71,20 @@ function mostrar(lista){
     
     lista.forEach((producto) => {
         const precioFormateado = producto.precio.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-        const icono = getIcono(producto.tipo); // 👈 Obtenemos el ícono
+        const icono = getIcono(producto.tipo);
         
         contenedor.innerHTML += `
         <div class="card">
             <img src="${producto.imagen}" alt="${producto.nombre}" onerror="this.src='https://via.placeholder.com/300?text=Imagen+no+disponible'">
-            <h3>${icono} ${producto.nombre}</h3> <!-- 👈 Ícono aquí -->
+            <h3>${icono} ${producto.nombre}</h3>
             <p>${producto.descripcion}</p>
             <p class="precio">$${precioFormateado}</p>
             <a href="${producto.video}" target="_blank">🎥 Ver video</a>
             <br><br>
-            <button onclick='agregarAlCarrito(${JSON.stringify(producto).replace(/'/g, "\\'")})'>Agregar al carrito</button>
+            <button onclick='agregarAlCarrito(${JSON.stringify(producto).replace(/'/g, "\\'")})'>➕ Agregar al carrito</button>
         </div>
         `
     })
-}
-
-// También podemos agregar íconos a los botones de filtro
-function actualizarBotonesConIconos() {
-    // Esto se puede hacer en el HTML directamente
-    console.log('Botones actualizados con íconos');
 }
 
 function agregarAlCarrito(producto) {
@@ -132,7 +132,7 @@ function actualizarVistaCarrito() {
     
     if(carrito.length === 0) {
         contenido.innerHTML = `
-        <p style="text-align:center;padding:20px;">El carrito está vacío</p>
+        <p style="text-align:center;padding:20px;">🛒 El carrito está vacío</p>
         <div class="acciones-carrito">
             <button class="btn-secundario" onclick="cerrarModal()">Seguir comprando</button>
         </div>
@@ -143,7 +143,7 @@ function actualizarVistaCarrito() {
     let html = '<div class="items-carrito">'
     
     carrito.forEach((item, index) => {
-        const icono = getIcono(item.tipo); // 👈 Ícono también en el carrito
+        const icono = getIcono(item.tipo);
         html += `
         <div class="item-carrito">
             <div class="item-info">
@@ -227,7 +227,7 @@ function mostrarFormularioEnvio() {
         </div>
         
         <div class="resumen-compra">
-            <h4>Resumen de compra</h4>
+            <h4>📋 Resumen de compra</h4>
             ${carrito.map(item => {
                 const icono = getIcono(item.tipo);
                 return `
@@ -238,11 +238,11 @@ function mostrarFormularioEnvio() {
                 `;
             }).join('')}
             <div class="resumen-item">
-                <span>Envío</span>
+                <span>🚚 Envío</span>
                 <span>$${costoEnvio.toLocaleString()}</span>
             </div>
             <div class="resumen-total">
-                <span>Total</span>
+                <span>💰 Total</span>
                 <span>$${total.toLocaleString()}</span>
             </div>
         </div>
@@ -257,7 +257,25 @@ function mostrarFormularioEnvio() {
     modalEnvio.style.display = 'block'
 }
 
-function enviarPedidoWhatsApp() {
+// ========== FUNCIÓN PARA ABRIR WHATSAPP (MÓVIL Y PC) ==========
+function abrirWhatsApp(numero, mensaje) {
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    const numeroLimpio = numero.replace(/\D/g, '')
+    
+    if (isMobile) {
+        window.location.href = `whatsapp://send?phone=${numeroLimpio}&text=${mensaje}`
+        setTimeout(() => {
+            if (!document.hidden) {
+                mostrarNotificacion('⚠️ Si no abre, verifica que tengas WhatsApp instalado')
+            }
+        }, 2000)
+    } else {
+        window.open(`https://wa.me/${numeroLimpio}?text=${mensaje}`, '_blank')
+    }
+}
+
+// ========== FUNCIÓN PRINCIPAL: ENVIAR PEDIDO A WHATSAPP Y GUARDAR EN SUPABASE ==========
+async function enviarPedidoWhatsApp() {
     const nombre = document.getElementById('nombre')?.value
     const telefono = document.getElementById('telefono')?.value
     const direccion = document.getElementById('direccion')?.value
@@ -273,7 +291,64 @@ function enviarPedidoWhatsApp() {
     const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0)
     const total = subtotal + costoEnvio
     
-    let mensaje = "🛒 *NUEVO PEDIDO - JL CELULARES*%0A%0A"
+    // Preparar productos para guardar
+    const productosGuardar = carrito.map(item => ({
+        nombre: item.nombre,
+        tipo: item.tipo,
+        cantidad: item.cantidad,
+        precio_unitario: item.precio,
+        subtotal: item.precio * item.cantidad
+    }))
+    
+    // Generar número de pedido único
+    const numeroPedido = `JL-${Date.now()}-${Math.floor(Math.random() * 1000)}`
+    
+    // Datos del pedido
+    const pedidoData = {
+        numero_pedido: numeroPedido,
+        cliente_nombre: nombre,
+        cliente_telefono: telefono,
+        cliente_direccion: direccion,
+        cliente_ciudad: ciudad,
+        cliente_estado: estado,
+        cliente_cp: cp,
+        productos: productosGuardar,
+        subtotal: subtotal,
+        costo_envio: costoEnvio,
+        total: total,
+        estado: 'pendiente',
+        fecha: new Date().toISOString()
+    }
+    
+    // Mostrar notificación de guardado
+    mostrarNotificacion('💾 Guardando pedido...')
+    
+    // ========== GUARDAR EN SUPABASE ==========
+    try {
+        const { data, error } = await supabaseClient
+            .from('pedidos_jl')
+            .insert([pedidoData])
+            .select()
+        
+        if (error) {
+            console.error('Error al guardar en Supabase:', error)
+            mostrarNotificacion('⚠️ Error al guardar, pero se enviará por WhatsApp')
+            guardarPedidoLocal(pedidoData)
+        } else {
+            console.log('✅ Pedido guardado en Supabase:', data)
+            mostrarNotificacion(`✅ Pedido ${numeroPedido} guardado correctamente`)
+        }
+    } catch (error) {
+        console.error('Error:', error)
+        guardarPedidoLocal(pedidoData)
+        mostrarNotificacion('⚠️ Error de conexión, guardado localmente')
+    }
+    
+    // ========== PREPARAR MENSAJE DE WHATSAPP ==========
+    const numeroWhatsappNegocio = '523111063251'  // Número de JL Celulares
+    
+    let mensaje = "🛒 *NUEVO PEDIDO - JL CELULARES*%0A"
+    mensaje += `📋 *NÚMERO DE PEDIDO:* ${numeroPedido}%0A%0A`
     mensaje += "*PRODUCTOS:*%0A"
     
     carrito.forEach(item => {
@@ -285,20 +360,33 @@ function enviarPedidoWhatsApp() {
     mensaje += `%0A*ENVÍO:* $${costoEnvio.toLocaleString()}`
     mensaje += `%0A*TOTAL:* $${total.toLocaleString()}%0A%0A`
     
-    mensaje += "*DATOS DE ENVÍO:*%0A"
+    mensaje += "*DATOS DEL CLIENTE:*%0A"
     mensaje += `👤 ${nombre}%0A`
     mensaje += `📞 ${telefono}%0A`
     mensaje += `📍 ${direccion}%0A`
     mensaje += `🏙️ ${ciudad}, ${estado} CP ${cp}%0A%0A`
     
-    mensaje += "¡Gracias por tu compra! 🙌"
+    mensaje += "¡Gracias por tu compra! 🙌%0A"
+    mensaje += "📍 JL Celulares - ¡Siempre contigo! 📱"
     
-    window.open(`https://wa.me/523111063251?text=${mensaje}`)
+    // Abrir WhatsApp
+    abrirWhatsApp(numeroWhatsappNegocio, mensaje)
     
-    cerrarModalEnvio()
-    carrito = []
-    actualizarContadorCarrito()
-    mostrarNotificacion('✅ Pedido enviado por WhatsApp')
+    // Limpiar carrito y cerrar modal
+    setTimeout(() => {
+        cerrarModalEnvio()
+        carrito = []
+        actualizarContadorCarrito()
+    }, 1500)
+}
+
+// Guardar pedidos localmente como respaldo
+function guardarPedidoLocal(pedido) {
+    const pedidosGuardados = localStorage.getItem('pedidos_backup_jl')
+    let pedidos = pedidosGuardados ? JSON.parse(pedidosGuardados) : []
+    pedidos.push(pedido)
+    localStorage.setItem('pedidos_backup_jl', JSON.stringify(pedidos))
+    console.log('💾 Pedido guardado localmente, total:', pedidos.length)
 }
 
 function cambiarCantidad(index, cambio) {
@@ -317,7 +405,7 @@ function eliminarDelCarrito(index) {
     carrito.splice(index, 1)
     actualizarVistaCarrito()
     actualizarContadorCarrito()
-    mostrarNotificacion('Producto eliminado')
+    mostrarNotificacion('🗑️ Producto eliminado')
 }
 
 function vaciarCarrito() {
@@ -325,7 +413,7 @@ function vaciarCarrito() {
         carrito = []
         actualizarVistaCarrito()
         actualizarContadorCarrito()
-        mostrarNotificacion('Carrito vaciado')
+        mostrarNotificacion('🛒 Carrito vaciado')
     }
 }
 
@@ -345,7 +433,7 @@ function mostrarNotificacion(mensaje) {
     bottom: 100px;
     left: 50%;
     transform: translateX(-50%);
-    background: #00a86b;
+    background: #0d6efd;
     color: white;
     padding: 10px 20px;
     border-radius: 30px;
@@ -393,6 +481,7 @@ window.onclick = function(event) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Página cargada - Versión:', VERSION);
+    console.log('🚀 JL Celulares - Página cargada - Versión:', VERSION);
+    console.log('📱 Dispositivo:', /Mobile|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'Móvil' : 'PC');
     cargarProductos();
 });
