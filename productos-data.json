@@ -8,14 +8,6 @@
         "video": "https://youtube.com/shorts/SMVdT-5doO8?si=Fa5aP4pw6mvso4la"
     },
     {
-        "nombre": "iPhone 11",
-        "descripcion": "64GB | Batería 83% | Libre | Reacondicionado",
-        "precio": 3199,
-        "tipo": "celular",
-        "imagen": "https://cdn.smart-gsm.com/img/picture/big/apple-iphone-11.jpg",
-        "video": "https://youtube.com/shorts/w1KHfhfkdac?si=iiKdW_T9IcwKIqMx"
-    },
-    {
         "nombre": "iPhone 12 pro",
         "descripcion": "128GB | Batería 100% | Libre | Reacondicionado",
         "precio": 4599,
