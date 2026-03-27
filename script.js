@@ -10,7 +10,7 @@ let costoEnvio = 150
 let productosGlobales = []
 
 // ⚡ VERSIÓN ACTUAL
-const VERSION = '2.1.1'
+const VERSION = '3.0.0'
 
 // 🎯 ÍCONOS POR CATEGORÍA
 const iconosCategoria = {

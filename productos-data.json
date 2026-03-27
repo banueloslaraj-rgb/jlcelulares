@@ -48,6 +48,30 @@
         "video": "https://youtube.com/shorts/6VT5zkQ6qro?si=gWZRcqJfr8NAIHMr"
     },
     {
+        "nombre": "iPhone 11 Pro Max a credito pagos semanales",
+        "descripcion": "128GB | Batería 80% | Libre | Credito | Semineuvo | El precio cambia segun el plazo",
+        "precio": 13700,
+        "tipo": "celular",
+        "imagen": "https://i.postimg.cc/mDM5bNLN/11-pro-max-credito.jpg",
+        "video": "https://youtube.com/shorts/C_kWU101R_w?si=PrE8OEcO1yJb5_wL"
+    },
+    {
+        "nombre": "iPhone 13 a credito pagos semanales",
+        "descripcion": "128GB | Batería 83% | Libre | Credito | Semineuvo | El precio cambia segun el plazo",
+        "precio": 13700,
+        "tipo": "celular",
+        "imagen": "https://i.postimg.cc/htjZJq47/iphone-13-negro-credito.jpg",
+        "video": "https://youtube.com/shorts/XpSLN21Y-io?si=cjNXH4ngL5ykrYFv"
+    },
+    {
+        "nombre": "iPhone 14 plus a credito pagos semanales",
+        "descripcion": "128GB | Batería 84% | Libre | Credito | Semineuvo | El precio cambia segun el plazo",
+        "precio": 18500,
+        "tipo": "celular",
+        "imagen": "https://i.postimg.cc/kGvYSJtQ/14-plus-lila-credito.jpg",
+        "video": "https://youtube.com/shorts/5lkqCuz_Dyw?si=XjJVKW3xYK4DpT04"
+    },
+    {
         "nombre": "Samsung A06",
         "descripcion": "64GB | Reacondicionado | Libre",
         "precio": 1799,
