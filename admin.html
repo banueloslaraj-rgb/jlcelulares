@@ -49,7 +49,35 @@
         .toast { position: fixed; bottom: 30px; right: 30px; background: #28a745; color: white; padding: 12px 24px; border-radius: 10px; z-index: 3000; animation: fadeOut 3s ease forwards; }
         .toast-error { background: #dc3545; }
         @keyframes fadeOut { 0% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; visibility: hidden; } }
-        @media (max-width: 768px) { .admin-header h1 { font-size: 18px; } th, td { font-size: 12px; padding: 8px; } .stats { grid-template-columns: 1fr 1fr; } }
+        
+        /* Estilos para gestión de productos */
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: bold; color: #555; }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: #0d6efd;
+            outline: none;
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .btn-editar { background: #ffc107; color: #333; padding: 6px 12px; border: none; border-radius: 5px; cursor: pointer; margin-right: 5px; }
+        .btn-eliminar { background: #dc3545; color: white; padding: 6px 12px; border: none; border-radius: 5px; cursor: pointer; }
+        .producto-img { width: 50px; height: 50px; object-fit: cover; border-radius: 8px; }
+        .seccion-productos { background: white; margin: 20px 25px; border-radius: 15px; padding: 20px; }
+        .header-productos { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 20px; }
+        
+        @media (max-width: 768px) {
+            .admin-header h1 { font-size: 18px; }
+            th, td { font-size: 12px; padding: 8px; }
+            .stats { grid-template-columns: 1fr 1fr; }
+            .form-row { grid-template-columns: 1fr; }
+            .header-productos { flex-direction: column; gap: 15px; }
+        }
     </style>
 </head>
 <body>
@@ -110,6 +138,33 @@
             </tbody>
         </table>
     </div>
+
+    <!-- Sección de Gestión de Productos -->
+    <div class="seccion-productos">
+        <div class="header-productos">
+            <h2 style="color: #0d6efd;">📦 Gestión de Productos</h2>
+            <button onclick="abrirModalProducto()" style="background: #28a745; padding: 12px 24px; border: none; border-radius: 10px; color: white; cursor: pointer;">➕ Agregar Producto</button>
+        </div>
+        
+        <div style="overflow-x: auto;">
+            <table style="width: 100%;">
+                <thead>
+                    <tr style="background: #0d6efd; color: white;">
+                        <th>ID</th>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Precio</th>
+                        <th>Tipo</th>
+                        <th>Acciones</th>
+                     </tr>
+                </thead>
+                <tbody id="productosBody">
+                    <tr><td colspan="7" class="loading">🔄 Cargando productos...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <div id="detalleModal" class="modal">
@@ -120,9 +175,59 @@
     </div>
 </div>
 
+<!-- Modal para agregar/editar producto -->
+<div id="modalProducto" class="modal">
+    <div class="modal-content" style="max-width: 600px;">
+        <h2 id="modalProductoTitulo">➕ Agregar Producto</h2>
+        <form id="productoForm">
+            <input type="hidden" id="productoId">
+            <div class="form-group">
+                <label>📷 URL de la imagen *</label>
+                <input type="text" id="productoImagen" required placeholder="https://i.postimg.cc/xxx/imagen.jpg">
+                <small>Usa Postimg o similar para subir imágenes gratis</small>
+            </div>
+            <div class="form-group">
+                <label>📝 Nombre del producto *</label>
+                <input type="text" id="productoNombre" required>
+            </div>
+            <div class="form-group">
+                <label>📄 Descripción *</label>
+                <textarea id="productoDescripcion" rows="3" required></textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>💰 Precio *</label>
+                    <input type="number" id="productoPrecio" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label>🏷️ Tipo/Categoría *</label>
+                    <select id="productoTipo" required>
+                        <option value="celular">📱 Celulares</option>
+                        <option value="laptop">💻 Laptops y Computadoras</option>
+                        <option value="accesorio">🔌 Accesorios</option>
+                        <option value="sim">📶 SIM/eSIM</option>
+                        <option value="servicio">🛠️ Servicios</option>
+                        <option value="ortopedia">🩼 Ortopedia</option>
+                        <option value="impresoras">🖨️ Impresoras</option>
+                        <option value="puntosVenta">💳 Puntos Venta</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>🎥 URL del video (opcional)</label>
+                <input type="text" id="productoVideo" placeholder="https://youtube.com/...">
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button type="submit" style="background: #28a745; padding: 12px; border: none; border-radius: 8px; color: white; cursor: pointer; flex: 1;">💾 Guardar</button>
+                <button type="button" onclick="cerrarModalProducto()" style="background: #6c757d; padding: 12px; border: none; border-radius: 8px; color: white; cursor: pointer; flex: 1;">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-    // Configuración de Supabase
+    // ========== CONFIGURACIÓN DE SUPABASE ==========
     const SUPABASE_URL = 'https://ybmkdrbpebckwgncjted.supabase.co'
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlibWtkcmJwZWJja3dnbmNqdGVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzODI1MDMsImV4cCI6MjA4OTk1ODUwM30.FyT4ouoVaSL9eJgSuEWqzVRrFjNFMH-liISab6Ed6Nw'
     
@@ -130,8 +235,9 @@
     
     let pedidos = []
     let ordenActual = { columna: 'fecha', direccion: 'desc' }
+    let productosAdmin = []
     
-    // Login
+    // ========== LOGIN ==========
     function verificarPassword() {
         const password = document.getElementById('passwordInput').value
         const mensajeDiv = document.getElementById('mensajeLogin')
@@ -142,6 +248,7 @@
                 document.getElementById('loginPanel').style.display = 'none'
                 document.getElementById('adminPanel').style.display = 'block'
                 cargarPedidos()
+                cargarProductosAdmin()
             }, 500)
         } else {
             mensajeDiv.innerHTML = '<div class="error-message">❌ Contraseña incorrecta</div>'
@@ -156,7 +263,7 @@
         document.getElementById('mensajeLogin').innerHTML = ''
     }
     
-    // Cargar pedidos
+    // ========== CARGAR PEDIDOS ==========
     async function cargarPedidos() {
         const tbody = document.getElementById('pedidosBody')
         tbody.innerHTML = '<tr><td colspan="7" class="loading">🔄 Cargando pedidos...</td></tr>'
@@ -167,18 +274,14 @@
                 .select('*')
                 .order(ordenActual.columna, { ascending: ordenActual.direccion === 'asc' })
             
-            if (error) {
-                console.error('Error:', error)
-                tbody.innerHTML = `<tr><td colspan="7" class="loading" style="color:red;">❌ Error: ${error.message}</td></tr>`
-                return
-            }
+            if (error) throw error
             
             pedidos = data || []
             mostrarPedidos(pedidos)
             actualizarEstadisticas(pedidos)
         } catch (err) {
-            console.error('Error de conexión:', err)
-            tbody.innerHTML = '<tr><td colspan="7" class="loading" style="color:red;">❌ Error de conexión con Supabase</td></tr>'
+            console.error('Error:', err)
+            tbody.innerHTML = '<tr><td colspan="7" class="loading" style="color:red;">❌ Error de conexión</td></tr>'
         }
     }
     
@@ -215,7 +318,6 @@
         `).join('')
     }
     
-    // ========== CAMBIAR ESTADO CON MENSAJES AMIGABLES ==========
     async function cambiarEstado(numeroPedido, nuevoEstado) {
         const pedido = pedidos.find(p => p.numero_pedido === numeroPedido)
         if (!pedido) {
@@ -223,109 +325,65 @@
             return
         }
         
-        // ========== MENSAJES AMIGABLES SEGÚN EL ESTADO ==========
         let mensajeWhatsApp = ''
         let tituloConfirmacion = ''
         
         switch(nuevoEstado) {
             case 'procesando':
                 tituloConfirmacion = '⚙️ PEDIDO EN PROCESO'
-                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
-                mensajeWhatsApp += `✅ Tu pedido *${pedido.numero_pedido}* está siendo preparado. %0A`
-                mensajeWhatsApp += `En breve te avisamos cuando esté listo para envío. %0A%0A`
-                mensajeWhatsApp += `¡Gracias por tu paciencia! 🙌%0A`
-                mensajeWhatsApp += `📍 JL Celulares`
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A✅ Tu pedido *${pedido.numero_pedido}* está siendo preparado. %0AEn breve te avisamos cuando esté listo. %0A%0A¡Gracias por tu paciencia! 🙌%0A📍 JL Celulares`
                 break
-                
             case 'enviado':
                 tituloConfirmacion = '🚚 PEDIDO ENVIADO'
-                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
-                mensajeWhatsApp += `🎉 ¡Tu pedido *${pedido.numero_pedido}* ya está en camino! 🚚%0A`
-                mensajeWhatsApp += `Pronto recibirás tu pedido. %0A%0A`
-                mensajeWhatsApp += `Gracias por confiar en JL Celulares 💙%0A`
-                mensajeWhatsApp += `📍 ¡Siempre contigo!`
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A🎉 ¡Tu pedido *${pedido.numero_pedido}* ya está en camino! 🚚%0APronto lo recibirás. %0A%0AGracias por confiar en JL Celulares 💙`
                 break
-                
             case 'entregado':
                 tituloConfirmacion = '✅ PEDIDO ENTREGADO'
-                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
-                mensajeWhatsApp += `🎉 ¡Tu pedido *${pedido.numero_pedido}* ha sido entregado con éxito! %0A%0A`
-                mensajeWhatsApp += `Gracias por tu compra. ¡Te esperamos pronto! 💙%0A`
-                mensajeWhatsApp += `📍 JL Celulares`
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A🎉 ¡Tu pedido *${pedido.numero_pedido}* ha sido entregado con éxito! %0A%0AGracias por tu compra. ¡Te esperamos pronto! 💙`
                 break
-                
             case 'cancelado':
                 tituloConfirmacion = '❌ PEDIDO CANCELADO'
-                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
-                mensajeWhatsApp += `Lamentamos informarte que tu pedido *${pedido.numero_pedido}* ha sido cancelado. %0A%0A`
-                mensajeWhatsApp += `Si tienes dudas, contáctanos al 3111063251. %0A%0A`
-                mensajeWhatsApp += `📍 JL Celulares`
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0ALamentamos informarte que tu pedido *${pedido.numero_pedido}* ha sido cancelado. %0A%0ASi tienes dudas, contáctanos al 3111063251.`
                 break
-                
-            case 'pendiente':
-                tituloConfirmacion = '📋 PEDIDO RECIBIDO'
-                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
-                mensajeWhatsApp += `✅ Hemos recibido tu pedido *${pedido.numero_pedido}* correctamente. %0A`
-                mensajeWhatsApp += `En breve comenzaremos con su preparación. %0A%0A`
-                mensajeWhatsApp += `¡Gracias por preferirnos! 🙌%0A`
-                mensajeWhatsApp += `📍 JL Celulares`
-                break
-                
             default:
-                tituloConfirmacion = '📌 ESTADO ACTUALIZADO'
-                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, %0A%0A`
-                mensajeWhatsApp += `Tu pedido *${pedido.numero_pedido}* ahora está en estado: *${nuevoEstado}* %0A%0A`
-                mensajeWhatsApp += `Para más información, contáctanos al 3111063251. %0A%0A`
-                mensajeWhatsApp += `📍 JL Celulares`
+                mensajeWhatsApp = `Hola ${pedido.cliente_nombre}, tu pedido *${pedido.numero_pedido}* ahora está en estado: *${nuevoEstado}*`
                 break
         }
         
-        // Mostrar confirmación antes de enviar
-        const confirmar = confirm(`📱 ¿Enviar WhatsApp al cliente?\n\n${tituloConfirmacion}\n\nCliente: ${pedido.cliente_nombre}\nTeléfono: ${pedido.cliente_telefono}\n\nMensaje:\n${mensajeWhatsApp.replace(/%0A/g, '\n')}`)
+        const confirmar = confirm(`📱 ¿Enviar WhatsApp al cliente?\n\n${tituloConfirmacion}\n\nCliente: ${pedido.cliente_nombre}\nTeléfono: ${pedido.cliente_telefono}`)
         
         if (!confirmar) {
-            // Si no quiere enviar WhatsApp, solo actualiza el estado
             const { error } = await supabaseClient
                 .from('pedidos_jl')
-                .update({ estado: nuevoEstado, fecha_actualizacion: new Date().toISOString() })
+                .update({ estado: nuevoEstado })
                 .eq('numero_pedido', numeroPedido)
             
             if (error) {
                 mostrarToast('❌ Error: ' + error.message, 'error')
             } else {
-                mostrarToast('✅ Estado actualizado (sin WhatsApp)', 'success')
+                mostrarToast('✅ Estado actualizado', 'success')
                 cargarPedidos()
             }
             return
         }
         
-        // ========== ENVIAR WHATSAPP CON MENSAJE AMIGABLE ==========
         const numeroCliente = pedido.cliente_telefono.replace(/\D/g, '')
-        const numeroWhatsapp = `52${numeroCliente}` // Código país México
-        
-        // Detectar si es móvil o PC
+        const numeroWhatsapp = `52${numeroCliente}`
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
         
         if (isMobile) {
             window.location.href = `whatsapp://send?phone=${numeroWhatsapp}&text=${mensajeWhatsApp}`
-            setTimeout(() => {
-                if (!document.hidden) {
-                    mostrarToast('⚠️ Si no abre, verifica que tengas WhatsApp instalado', 'error')
-                }
-            }, 2000)
         } else {
             window.open(`https://wa.me/${numeroWhatsapp}?text=${mensajeWhatsApp}`, '_blank')
-            mostrarToast('📱 Abriendo WhatsApp Web...', 'success')
         }
         
-        // ========== ACTUALIZAR ESTADO EN SUPABASE ==========
         const { error } = await supabaseClient
             .from('pedidos_jl')
-            .update({ estado: nuevoEstado, fecha_actualizacion: new Date().toISOString() })
+            .update({ estado: nuevoEstado })
             .eq('numero_pedido', numeroPedido)
         
         if (error) {
-            mostrarToast('❌ Error al actualizar estado: ' + error.message, 'error')
+            mostrarToast('❌ Error: ' + error.message, 'error')
         } else {
             mostrarToast(`✅ Estado actualizado a: ${nuevoEstado}`, 'success')
             cargarPedidos()
@@ -428,16 +486,8 @@
             )
         }
         
-        if (estado) {
-            filtrados = filtrados.filter(p => p.estado === estado)
-        }
-        
-        if (fecha) {
-            filtrados = filtrados.filter(p => {
-                if (!p.fecha) return false
-                return new Date(p.fecha).toISOString().split('T')[0] === fecha
-            })
-        }
+        if (estado) filtrados = filtrados.filter(p => p.estado === estado)
+        if (fecha) filtrados = filtrados.filter(p => p.fecha && new Date(p.fecha).toISOString().split('T')[0] === fecha)
         
         mostrarPedidos(filtrados)
     }
@@ -452,22 +502,187 @@
         cargarPedidos()
     }
     
+    // ========== CRUD DE PRODUCTOS ==========
+    async function cargarProductosAdmin() {
+        const tbody = document.getElementById('productosBody');
+        tbody.innerHTML = '<tr><td colspan="7" class="loading">🔄 Cargando productos...</td></tr>';
+        
+        const { data, error } = await supabaseClient
+            .from('productos_jl')
+            .select('*')
+            .order('id', { ascending: false });
+        
+        if (error) {
+            tbody.innerHTML = `<tr><td colspan="7" style="color:red;">❌ Error: ${error.message}</td></tr>`;
+            return;
+        }
+        
+        productosAdmin = data || [];
+        
+        if (productosAdmin.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="7" class="loading">📭 No hay productos. ¡Agrega uno!</td></tr>';
+            return;
+        }
+        
+        tbody.innerHTML = productosAdmin.map(prod => `
+            <tr>
+                <td>${prod.id}</td>
+                <td><img src="${prod.imagen}" class="producto-img" onerror="this.src='https://via.placeholder.com/50'"></td>
+                <td><strong>${prod.nombre}</strong></td>
+                <td style="max-width: 250px;">${prod.descripcion.substring(0, 60)}${prod.descripcion.length > 60 ? '...' : ''}</td>
+                <td>$${Number(prod.precio).toLocaleString()}</td>
+                <td>${prod.tipo}</td>
+                <td>
+                    <button class="btn-editar" onclick="editarProducto(${prod.id})">✏️ Editar</button>
+                    <button class="btn-eliminar" onclick="eliminarProducto(${prod.id})">🗑️ Eliminar</button>
+                </td>
+            </tr>
+        `).join('');
+    }
+    
+    function abrirModalProducto() {
+        document.getElementById('modalProductoTitulo').textContent = '➕ Agregar Producto';
+        document.getElementById('productoForm').reset();
+        document.getElementById('productoId').value = '';
+        document.getElementById('modalProducto').style.display = 'block';
+    }
+    
+    function cerrarModalProducto() {
+        document.getElementById('modalProducto').style.display = 'none';
+    }
+    
+    async function editarProducto(id) {
+        const producto = productosAdmin.find(p => p.id === id);
+        if (!producto) return;
+        
+        document.getElementById('modalProductoTitulo').textContent = '✏️ Editar Producto';
+        document.getElementById('productoId').value = producto.id;
+        document.getElementById('productoNombre').value = producto.nombre;
+        document.getElementById('productoDescripcion').value = producto.descripcion;
+        document.getElementById('productoPrecio').value = Number(producto.precio);
+        document.getElementById('productoTipo').value = producto.tipo;
+        document.getElementById('productoImagen').value = producto.imagen;
+        document.getElementById('productoVideo').value = producto.video || '#';
+        
+        document.getElementById('modalProducto').style.display = 'block';
+    }
+    
+    async function eliminarProducto(id) {
+        const producto = productosAdmin.find(p => p.id === id);
+        if (!confirm(`¿Eliminar "${producto.nombre}" permanentemente?`)) return;
+        
+        const { error } = await supabaseClient
+            .from('productos_jl')
+            .delete()
+            .eq('id', id);
+        
+        if (error) {
+            mostrarToast('❌ Error: ' + error.message, 'error');
+        } else {
+            mostrarToast(`✅ "${producto.nombre}" eliminado`, 'success');
+            cargarProductosAdmin();
+            await recargarTienda();
+        }
+    }
+    
+    async function recargarTienda() {
+        try {
+            const { data, error } = await supabaseClient
+                .from('productos_jl')
+                .select('*')
+                .order('id', { ascending: true });
+            
+            if (!error && data) {
+                localStorage.setItem('productos_actualizados_jl', JSON.stringify({
+                    timestamp: Date.now(),
+                    productos: data
+                }));
+                console.log('✅ Tienda actualizada automáticamente');
+                mostrarToast('✨ Productos actualizados en la tienda', 'success');
+            }
+        } catch(e) { 
+            console.error('Error al actualizar tienda:', e);
+        }
+    }
+    
+    document.getElementById('productoForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const id = document.getElementById('productoId').value;
+        let precioValue = document.getElementById('productoPrecio').value;
+        precioValue = parseFloat(precioValue.toString().replace(/,/g, ''));
+        
+        if (isNaN(precioValue) || precioValue < 0) {
+            mostrarToast('❌ Ingresa un precio válido', 'error');
+            return;
+        }
+        
+        const productoData = {
+            nombre: document.getElementById('productoNombre').value,
+            descripcion: document.getElementById('productoDescripcion').value,
+            precio: precioValue,
+            tipo: document.getElementById('productoTipo').value,
+            imagen: document.getElementById('productoImagen').value,
+            video: document.getElementById('productoVideo').value || '#',
+            updated_at: new Date().toISOString()
+        };
+        
+        console.log('📦 Guardando producto:', productoData);
+        
+        let error;
+        
+        if (id) {
+            const { error: updateError } = await supabaseClient
+                .from('productos_jl')
+                .update(productoData)
+                .eq('id', parseInt(id));
+            error = updateError;
+            if (!error) {
+                mostrarToast('✅ Producto actualizado', 'success');
+                await recargarTienda();
+            }
+        } else {
+            const { error: insertError } = await supabaseClient
+                .from('productos_jl')
+                .insert([{ ...productoData, created_at: new Date().toISOString() }]);
+            error = insertError;
+            if (!error) {
+                mostrarToast('✅ Producto agregado', 'success');
+                await recargarTienda();
+            }
+        }
+        
+        if (error) {
+            console.error('❌ Error:', error);
+            mostrarToast('❌ Error: ' + error.message, 'error');
+        } else {
+            cerrarModalProducto();
+            cargarProductosAdmin();
+        }
+    });
+    
     function cerrarModal() {
-        document.getElementById('detalleModal').style.display = 'none'
+        document.getElementById('detalleModal').style.display = 'none';
     }
     
     function mostrarToast(mensaje, tipo = 'success') {
-        const toast = document.createElement('div')
-        toast.className = 'toast'
-        if (tipo === 'error') toast.classList.add('toast-error')
-        toast.textContent = mensaje
-        document.body.appendChild(toast)
-        setTimeout(() => toast.remove(), 3000)
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        if (tipo === 'error') toast.classList.add('toast-error');
+        toast.textContent = mensaje;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
     }
     
     window.onclick = function(event) {
-        const modal = document.getElementById('detalleModal')
-        if (event.target === modal) modal.style.display = 'none'
+        const modal = document.getElementById('detalleModal');
+        const modalProducto = document.getElementById('modalProducto');
+        if (event.target === modal) modal.style.display = 'none';
+        if (event.target === modalProducto) modalProducto.style.display = 'none';
+    }
+    
+    window.onload = function() {
+        console.log('Admin panel JL Celulares cargado');
     }
 </script>
 </body>

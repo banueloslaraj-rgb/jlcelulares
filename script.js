@@ -29,32 +29,40 @@ function getIcono(tipo) {
     return iconosCategoria[tipo] || iconosCategoria.default;
 }
 
-// ========== CARGAR PRODUCTOS ==========
+// ========== CARGAR PRODUCTOS DESDE SUPABASE ==========
 async function cargarProductos(){
     try {
-        console.log('🔄 Cargando productos - JL Celulares Versión:', VERSION);
+        console.log('🔄 Cargando productos desde Supabase - Versión:', VERSION);
         
-        const timestamp = new Date().getTime();
-        const res = await fetch(`productos-data.json?v=${VERSION}&t=${timestamp}`);
+        const { data, error } = await supabaseClient
+            .from('productos_jl')
+            .select('*')
+            .order('id', { ascending: true });
         
-        if (!res.ok) {
-            throw new Error(`Error HTTP: ${res.status}`);
+        if (error) throw error;
+        
+        if (data && data.length > 0) {
+            productosGlobales = data.map(p => ({
+                ...p,
+                precio: Number(p.precio)
+            }));
+            console.log(`✅ Productos cargados desde Supabase: ${productosGlobales.length}`);
+        } else {
+            // Fallback a JSON local
+            console.log('⚠️ Supabase vacío, cargando desde JSON...');
+            const res = await fetch(`productos-data.json?v=${Date.now()}`);
+            const productosJson = await res.json();
+            productosGlobales = productosJson.map(p => ({ ...p, precio: Number(p.precio) }));
         }
-        
-        const productos = await res.json();
-        
-        productosGlobales = productos.map(p => ({
-            ...p,
-            precio: Number(p.precio)
-        }));
         
         mostrar(productosGlobales);
         
-        console.log(`✅ Productos cargados: ${productosGlobales.length} productos`);
-        
     } catch (error) {
         console.error('❌ Error cargando productos:', error);
-        document.getElementById('productos').innerHTML = '<p style="text-align:center;color:red;">Error al cargar productos. Recarga la página.</p>';
+        const res = await fetch(`productos-data.json?v=${Date.now()}`);
+        const productosJson = await res.json();
+        productosGlobales = productosJson.map(p => ({ ...p, precio: Number(p.precio) }));
+        mostrar(productosGlobales);
     }
 }
 
@@ -256,7 +264,6 @@ function mostrarFormularioEnvio() {
     modalEnvio.style.display = 'block'
 }
 
-// ========== FUNCIÓN PARA ABRIR WHATSAPP (MÓVIL Y PC) ==========
 function abrirWhatsApp(numero, mensaje) {
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     const numeroLimpio = numero.replace(/\D/g, '')
@@ -273,7 +280,6 @@ function abrirWhatsApp(numero, mensaje) {
     }
 }
 
-// ========== FUNCIÓN PRINCIPAL: ENVIAR PEDIDO A WHATSAPP Y GUARDAR EN SUPABASE ==========
 async function enviarPedidoWhatsApp() {
     const nombre = document.getElementById('nombre')?.value
     const telefono = document.getElementById('telefono')?.value
@@ -290,7 +296,6 @@ async function enviarPedidoWhatsApp() {
     const subtotal = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0)
     const total = subtotal + costoEnvio
     
-    // Preparar productos para guardar
     const productosGuardar = carrito.map(item => ({
         nombre: item.nombre,
         tipo: item.tipo,
@@ -299,10 +304,8 @@ async function enviarPedidoWhatsApp() {
         subtotal: item.precio * item.cantidad
     }))
     
-    // Generar número de pedido único
     const numeroPedido = `JL-${Date.now()}-${Math.floor(Math.random() * 1000)}`
     
-    // Datos del pedido
     const pedidoData = {
         numero_pedido: numeroPedido,
         cliente_nombre: nombre,
@@ -319,10 +322,8 @@ async function enviarPedidoWhatsApp() {
         fecha: new Date().toISOString()
     }
     
-    // Mostrar notificación de guardado
     mostrarNotificacion('💾 Guardando pedido...')
     
-    // ========== GUARDAR EN SUPABASE ==========
     try {
         const { data, error } = await supabaseClient
             .from('pedidos_jl')
@@ -343,7 +344,6 @@ async function enviarPedidoWhatsApp() {
         mostrarNotificacion('⚠️ Error de conexión, guardado localmente')
     }
     
-    // ========== PREPARAR MENSAJE DE WHATSAPP ==========
     const numeroWhatsappNegocio = '523111063251'
     
     let mensaje = "🛒 *NUEVO PEDIDO - JL CELULARES*%0A"
@@ -468,6 +468,24 @@ function buscar() {
     )
     mostrar(filtrados)
 }
+
+// ========== DETECTAR CAMBIOS DESDE EL ADMIN ==========
+window.addEventListener('storage', function(e) {
+    if (e.key === 'productos_actualizados_jl' && e.newValue) {
+        console.log('🔄 Detectada actualización de productos, recargando...');
+        try {
+            const data = JSON.parse(e.newValue);
+            if (data.productos && data.productos.length > 0) {
+                productosGlobales = data.productos.map(p => ({ ...p, precio: Number(p.precio) }));
+                mostrar(productosGlobales);
+                mostrarNotificacion('✨ Productos actualizados automáticamente');
+            }
+        } catch (err) {
+            console.error('Error al procesar actualización:', err);
+            cargarProductos();
+        }
+    }
+});
 
 window.onclick = function(event) {
     const modalCarrito = document.getElementById('modalCarrito')
